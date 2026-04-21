@@ -1,0 +1,158 @@
+/* Card styling */
+.card {
+  background: #1f2428;
+  border-radius: 18px;
+  border: none;
+}
+
+/* Product image */
+.card img {
+  background: #ffffff;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+/* Product info text */
+.card h5 {
+  font-size: 1.1rem;
+}
+
+.card p {
+  font-size: 0.9rem;
+}
+
+/* Quantity buttons */
+.btn-outline-warning {
+  border-color: #ffc107;
+  color: #ffc107;
+}
+
+.btn-outline-warning:hover {
+  background-color: #ffc107;
+  color: #000;
+}
+
+/* Quantity input */
+input[type="number"] {
+  background: #2c3034;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+input[type="number"]:focus {
+  box-shadow: none;
+  border-color: #ffc107;
+}
+
+/* Price text */
+label {
+  color: #aaa;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.fw-bold {
+  font-size: 1.1rem;
+}
+
+/* Remove button */
+.btn-outline-danger {
+  border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+
+/* Responsive fix */
+@media (max-width: 768px) {
+  .card-body .row > div {
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  input[type="number"] {
+    margin: 0 auto;
+  }
+}
+/* ===== CART RESPONSIVE FIX ===== */
+
+/* Small tablets */
+@media (max-width: 992px) {
+  .container.my-5 .row {
+    flex-direction: column !important;
+  }
+
+  .card-body .row.align-items-center {
+    flex-direction: column !important;
+    text-align: center;
+  }
+
+  .card-body .col-md-2,
+  .card-body .col-md-4 {
+    width: 100% !important;
+    margin-bottom: 15px;
+  }
+
+  .card-body img {
+    max-width: 100px;
+    margin: 0 auto;
+  }
+
+  .d-flex.justify-content-between {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .card-body .row.align-items-center {
+    flex-direction: column !important;
+  }
+
+  .card-body .col-md-2,
+  .card-body .col-md-4 {
+    width: 100% !important;
+    margin-bottom: 10px;
+  }
+
+  .cart input.form-control {
+    width: 40px !important;
+  }
+
+  .btn {
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  .card-body img {
+    max-width: 80px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 576px) {
+  .cart h2,
+  .cart h5,
+  .cart p {
+    font-size: 0.9rem;
+  }
+
+  .card-body {
+    padding: 0.8rem;
+  }
+
+  .d-flex.justify-content-between span {
+    font-size: 0.9rem;
+  }
+
+  .btn-warning {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+}
+
+

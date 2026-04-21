@@ -1,0 +1,32 @@
+
+//This component used in Contact Component
+
+<div class="welcome-overlay">
+  <div class="welcome-card animate">
+
+    <button class="close-btn" (click)="closePage()">✕</button>
+
+    <h1>
+      Message Sent Successfully <span>📬</span>
+    </h1>
+
+    <h3 class="user-name">
+      Thanks, <span>{{ userName }}</span> 🔥
+    </h3>
+
+    <p>
+      We have received your message. We will get back to you soon!
+    </p>
+
+    <div class="divider"></div>
+
+    <p class="sub-text">
+      Stay connected and keep pushing towards your fitness goals.
+    </p>
+
+    <button class="start-btn" (click)="closePage()">
+      Back to Home →
+    </button>
+
+  </div>
+</div>

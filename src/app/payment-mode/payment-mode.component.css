@@ -1,0 +1,211 @@
+/* PAGE BACKGROUND */
+.payment-wrapper {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* PAYMENT CARD */
+.payment-card {
+  width: 420px;
+  background: #1a1a1a;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0px 5px 20px rgba(0,0,0,0.5);
+}
+
+/* TITLE */
+.title {
+  color: #ffc107;
+  font-weight: 600;
+}
+
+/* AMOUNT BOX */
+.amount-box {
+  background: #2a2a2a;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.price {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffc107;
+}
+
+/* PAYMENT BUTTONS */
+
+.payment-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.mode-btn {
+  flex: 1;
+  background: #2a2a2a;
+  color: white;
+  border: 1px solid #444;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.mode-btn:hover {
+  background: #ffc107;
+  color: black;
+}
+
+/* PAYMENT SECTION */
+
+.payment-section {
+  background: #2a2a2a;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+/* ADDRESS BOX */
+
+.address-box {
+  background: #1c1c1c;
+  padding: 12px;
+  border-radius: 6px;
+}
+
+/* INPUT */
+
+.input-box {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+  border: none;
+}
+
+.row-box {
+  display: flex;
+  gap: 10px;
+}
+
+/* UPI */
+
+.upi-select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+/* PAY BUTTON */
+
+.pay-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background: #ffc107;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.pay-btn:hover {
+  background: orange;
+}
+
+
+/* ========================= */
+/* PRODUCT SECTION */
+/* ========================= */
+
+.product-section {
+
+  flex: 1;
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 5px 20px rgba(0,0,0,0.5);
+
+}
+
+/* PRODUCT ROW */
+
+.product-item {
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #2a2a2a;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+
+}
+
+
+/* PRODUCT IMAGE FIX (IMPORTANT) */
+
+.product-img {
+
+  width: 80px;
+  height: 80px;
+  object-fit: contain;  /* Image cut nahi hogi */
+  border-radius: 8px;
+  background: white;
+  padding: 5px;
+
+}
+
+
+/* PRODUCT INFO */
+
+.product-info {
+
+  flex: 1;
+  color: white;
+
+}
+
+.product-name {
+
+  font-weight: 600;
+  font-size: 16px;
+
+}
+
+.product-brand {
+
+  font-size: 13px;
+  color: #bbb;
+
+}
+
+.product-qty {
+
+  font-size: 13px;
+
+}
+
+
+/* PRICE */
+
+.product-price {
+
+  color: #ffc107;
+  font-weight: bold;
+  font-size: 16px;
+  min-width: 80px;
+  text-align: right;
+
+}
+.qr-img{
+width:200px;
+height:200px;
+border-radius:10px;
+background:white;
+padding:10px;
+box-shadow:0px 4px 10px rgba(0,0,0,0.5);
+margin:auto;
+display:block;
+}

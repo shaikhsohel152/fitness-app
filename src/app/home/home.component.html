@@ -1,0 +1,191 @@
+<!-- <section class="customCardContainer" style="margin-top: 100px;">
+  <div [routerLink]="element.id" class="card" *ngFor="let element of myDetailData">
+    <div class="card-body">
+     
+      <img [src]="element?.imgsrc" [alt]="element?.title" />
+      <h2>Id: {{element?.id}}</h2>
+      <h2> Brand: {{ element?.brand}}</h2>
+
+      <h2> Price: {{element?.price}}</h2>
+    </div>
+  </div>
+</section> -->
+
+
+<!-- <div class="row mt-4">
+  <div
+    class="col-md-3 col-sm-6 mb-4"
+    *ngFor="let element of products"
+      [routerLink]="['/home', element.id]">
+
+    <div class="card bg-dark text-light shadow-lg h-100">
+
+      <div class="overflow-hidden">
+        <img
+          [src]="element.imgsrc"
+          class="card-img-top product-image"
+          [alt]="element.brand">
+      </div>
+
+      <div class="card-body p-4">
+        <h4 class="fw-bold">{{ element.brand }}</h4>
+
+        <h6 class="mb-2">{{ element.bougth }}</h6>
+        <h6 class="mb-3">
+          Discount: {{ element.discountPercentage }}%
+        </h6>
+
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="price fw-bold">₹{{ element.price }}</span>
+
+          <button
+            class="btn btn-success px-4 py-2 rounded-pill"
+            (click)="addToCart(element)">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div> -->
+
+<!-- <Carousel Section -->
+<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+      aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="assets/home page photo.jpg" class="carousel-img" alt="Description of image">
+      <div class="carousel-caption d-none d-md-block" style="text-align: left;">
+        <h3>Welcome to Our Site</h3>
+        <p>Discover amazing features.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="assets/home page photo2.jpg" class="carousel-img" alt="Description of image">
+      <div class="carousel-caption d-none d-md-block">
+        <h3>Explore Our Services</h3>
+        <p>Quality and innovation.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="assets/home page photo3.jpg" class="carousel-img" alt="Description of image">
+      <div class="carousel-caption d-none d-md-block" style="text-align: right;">
+        <h3>Get in Touch</h3>
+        <p>Contact us today.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<!-- Cards Section -->
+
+
+<div class="home-container">
+  <h1 class="main-title text-center text-black" style="margin-top: 40px;">Build Your Best Body</h1>
+  <p class="subtitle text-center text-light">Train harder, get stronger, live healthier</p>
+
+  <!-- Card 1 -->
+  <div class="gym-card bg-dark">
+    <div class="image">
+      <img src="assets/protein-gym.avif" alt="Strength Training">
+    </div>
+    <div class="content text-light">
+      <h2>Protein Products</h2>
+      <p class="chair">
+        Fuel Your Muscles, Achieve Your Goals
+        Power up your workouts with our premium protein formula, designed for maximum muscle recovery and growth. Packed
+        with high-quality protein, essential amino acids, and zero unnecessary fillers, it supports strength, endurance,
+        and lean muscle development. Perfect for pre-workout energy or post-workout recovery—helping you get stronger,
+        faster, and healthier every day.
+
+      </p>
+      <!-- <button class="btn btn-">Explore</button> -->
+    </div>
+  </div>
+
+  <!-- Card 2 (Reverse) -->
+  <div class="gym-card reverse bg-dark">
+    <div class="image">
+      <img src="assets/cardio2.jpg" alt="Cardio Workout">
+    </div>
+    <div class="content text-light">
+      <h2>Cardio Workouts</h2>
+      <p>
+        Boost your stamina, burn calories, and strengthen your heart with our high-energy cardio workouts. From
+        treadmills and cycling to HIIT and endurance sessions, our programs are designed to improve performance,
+        increase fat loss, and keep you motivated every step of the way.
+      </p>
+      <!-- <button class="btn btn-success">Explore</button> -->
+    </div>
+  </div>
+
+  <!-- Card 3  -->
+  <div class="gym-card bg-dark">
+    <div class="image">
+      <img src="assets/personal.jpg" alt="Personal Training">
+    </div>
+    <div class="content text-light">
+      <h2>Personal Training</h2>
+      <p>
+        Achieve your fitness goals faster with our expert personal training programs. Get one-on-one guidance from
+        certified trainers who design workouts specifically for your body type, fitness level, and goals. Whether you
+        want to build muscle, lose fat, or improve overall strength, our personalized approach ensures maximum results
+        with proper form, motivation, and progress tracking.
+      </p>
+      <!-- <button class="btn btn-success">Explore</button> -->
+    </div>
+  </div>
+
+  <!-- Card 4 (Reverse)  -->
+  <div class="gym-card reverse bg-dark">
+    <div class="image">
+      <img src="assets/yoga.avif" alt="Yoga & Flexibility">
+    </div>
+    <div class="content text-light">
+      <h2>Yoga & Flexibility</h2>
+      <p>
+        Our yoga classes are designed to help you achieve physical fitness, mental clarity, and emotional balance.
+        Guided by certified instructors, each session focuses on flexibility, strength, breathing techniques, and
+        relaxation. Whether you are a beginner or an experienced practitioner, our yoga programs support stress relief,
+        improved mobility, better posture, and overall wellness.
+
+        Step onto the mat, reconnect with yourself, and embrace a healthier, more balanced lifestyle through the power
+        of yoga. 🧘‍♀️✨
+      </p>
+      <button class="btn">Explore</button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Footer  -->
+<footer class="short-footer bg-dark text-light mt-5 py-3">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+    
+    <div class="mb-2 mb-md-0">
+      <strong><i class="fas fa-dumbbell me-2 text-warning"></i>GymGear Pro</strong> &copy; 2026. All rights reserved.
+    </div>
+
+    <!-- <div class="d-flex gap-3">
+      <a href="#" class="footer-icon"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="footer-icon"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="footer-icon"><i class="fab fa-twitter"></i></a>
+    </div> -->
+
+  </div>
+</footer>

@@ -1,0 +1,36 @@
+
+//This component used in Checkout component 
+
+<div class="welcome-overlay">
+  <div class="welcome-card animate">
+
+    <button class="close-btn" (click)="closePage()">✕</button>
+
+    <h1>
+      Payment Successful <span>💳</span>
+    </h1>
+
+    <h3 class="user-name">
+      Thank you, <span>{{ userName }}</span> 🔥
+    </h3>
+
+    <p>
+      Your order has been placed successfully.
+    </p>
+    <p class="text-light fs-5">
+    Your payment was successful via <strong>{{ paymentMethod }}</strong>.
+  </p>
+
+    <div class="divider"></div>
+
+    <p class="sub-text">
+      We’re getting your fitness gear ready.
+      Stay strong and keep pushing forward!
+    </p>
+
+    <button class="start-btn" (click)="closePage()">
+      Continue Shopping →
+    </button>
+
+  </div>
+</div>

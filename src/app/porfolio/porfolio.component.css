@@ -1,0 +1,175 @@
+/* ===== PROFILE DASHBOARD ===== */
+.profile-dashboard {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 80px;
+  flex-wrap: wrap;
+}
+
+/* Panels */
+.left-panel, .right-panel {
+  flex: 1 1 400px;
+}
+
+/* ===== PROFILE CARD ===== */
+.profile-card {
+  background: #222;
+  padding: 30px;
+  border-radius: 16px;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(255, 193, 7, 0.4);
+}
+
+/* ===== AVATAR ===== */
+.profile-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  border: 3px solid #ffc107;
+  box-shadow: 0 4px 10px rgba(255,193,7,0.5);
+}
+
+.profile-avatar i {
+  font-size: 50px;
+  color: #ffc107;
+}
+
+/* ===== USER INFO ===== */
+.user-info p, .gym-info p {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.user-info i, .gym-info i {
+  color: #ffc107;
+}
+
+/* ===== GYM INFO HEADER ===== */
+.gym-info h6, .address-card h6 {
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: 1px solid #ffc107;
+  padding-bottom: 5px;
+}
+
+/* ===== ADDRESS CARD ===== */
+.address-card textarea {
+  background: #111;
+  border: 1px solid #ffc107;
+  border-radius: 12px;
+  color: #fff;
+  padding: 12px;
+  resize: none;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.address-card textarea:focus {
+  border-color: #ffeb3b;
+  box-shadow: 0 0 8px #ffeb3b;
+  outline: none;
+}
+
+/* ===== BUTTONS ===== */
+.btn-edit {
+  margin-top: 12px;
+  background: transparent;
+  border: 1px solid #ffc107;
+  color: #ffc107;
+  padding: 6px 14px;
+  border-radius: 25px;
+  transition: 0.3s ease;
+}
+
+.btn-edit:hover {
+  background: #ffc107;
+  color: #000;
+}
+
+.btn-save {
+  background: #ffc107;
+  color: #000;
+  border: none;
+  padding: 12px;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.btn-save:hover {
+  background: #ffea00;
+  transform: translateY(-2px);
+}
+
+.btn-cancel {
+  background: #ff5252;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.btn-cancel:hover {
+  background: #e53935;
+  transform: translateY(-2px);
+}
+
+/* ===== LOGOUT BUTTON ===== */
+.btn-danger {
+  background-color: #ff5252;
+  border: none;
+  transition: 0.3s ease;
+  padding: 14px 50px;
+  border-radius: 30px;
+  font-weight: 600;
+}
+
+.btn-danger:hover {
+  background-color: #e53935;
+  transform: translateY(-3px);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+  .profile-dashboard {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .left-panel, .right-panel {
+    width: 100%;
+  }
+}
+.order-btn-card{
+
+margin-top:20px;
+padding:25px;
+text-align:center;
+
+}
+
+.btn-myorders{
+
+background:#ffc107;
+border:none;
+color:black;
+padding:12px 25px;
+border-radius:10px;
+font-weight:600;
+font-size:16px;
+min-width:220px;
+
+}

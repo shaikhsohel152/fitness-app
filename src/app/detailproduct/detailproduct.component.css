@@ -1,0 +1,138 @@
+.detail-product-page {
+  font-family: 'Poppins', sans-serif;
+  background: #0d0d0d;
+  color: #ffffff;
+  padding: 50px 0;
+}
+
+/* --- Breadcrumb --- */
+.breadcrumb-nav {
+  background: #1f1f1f;
+  border-radius: 12px;
+  padding: 12px 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.breadcrumb a {
+  color: #d0d0d0;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+.breadcrumb a:hover {
+  color: #ffde59; /* neon yellow highlight */
+}
+
+.breadcrumb-item.active {
+  color: #ffde59;
+  font-weight: 600;
+}
+
+/* --- Product Section Card --- */
+.product-section {
+  background: #1a1a1a;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-section:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+}
+
+/* --- Main Product Image --- */
+.product-main-img {
+  width: 100%;
+  max-height: 450px;
+  border-radius: 20px;
+  object-fit: contain;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-main-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+}
+
+/* --- Product Details --- */
+.product-brand {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.product-description {
+  font-size: 1rem;
+  color: #d0d0d0;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.product-price {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffde59;
+  margin-bottom: 15px;
+}
+
+.product-category span,
+.product-rating {
+  color: #ffde59;
+  font-weight: 500;
+}
+
+/* --- Add to Cart Button --- */
+.btn-add-cart {
+  background: linear-gradient(90deg, #ffde59, #ffc107);
+  border: none;
+  border-radius: 15px;
+  font-weight: 600;
+  padding: 14px 0;
+  font-size: 1.1rem;
+  color: #0d0d0d;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(255,222,89,0.4);
+}
+
+.btn-add-cart:hover {
+  background: linear-gradient(90deg, #ffc107, #ffde59);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(255,222,89,0.6);
+}
+
+/* --- Additional Images --- */
+.additional-images {
+  margin-top: 50px;
+}
+
+.additional-images h5 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.additional-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.additional-img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+}
+
+/* --- Loading Template --- */
+.text-center h4 {
+  color: #ffde59;
+  font-weight: 600;
+}

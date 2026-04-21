@@ -1,0 +1,18 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-card {
+  background: #111;
+  color: #fff;
+  padding: 30px;
+  width: 360px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(255,193,7,0.3);
+}

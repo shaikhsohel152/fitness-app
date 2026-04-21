@@ -1,0 +1,196 @@
+<div class="payment-wrapper container mt-5 pt-5">
+
+  <div class="payment-card mx-auto">
+
+    <h3 class="title text-center mb-3">
+      Select Payment Method
+    </h3>
+
+    <div class="amount-box text-center mb-4 text-white">
+      Total Amount
+      <div class="price">₹ {{ totalAmount }}</div>
+    </div>
+
+
+    <!-- Payment Options -->
+
+    <div class="payment-buttons">
+
+      <button class="mode-btn" (click)="selectMode('COD')">
+        🚚 Cash on Delivery
+      </button>
+
+      <button class="mode-btn" (click)="selectMode('UPI')">
+        📱 UPI Payment
+      </button>
+
+      <button class="mode-btn" (click)="selectMode('Debit Card')">
+        💳 Debit Card
+      </button>
+
+      <button class="mode-btn" (click)="selectMode('Credit Card')">
+        💳 Credit Card
+      </button>
+
+    </div>
+
+
+    <!-- COD ADDRESS SHOW -->
+
+    <!-- DELIVERY ADDRESS SHOW ALL MODES -->
+    <div *ngIf="selectedMode" class="alert alert-info text-center">
+      Selected Payment Mode: <b>{{ selectedMode }}</b>
+    </div>
+
+    <div *ngIf="userAddress?.address" class="payment-section text-warning">
+
+      <h5>Delivery Address</h5>
+
+      <div class="address-box text-white">
+
+        <p><b class="text-warning">Name:</b> {{userAddress.name}}</p>
+
+        <p><b class="text-warning">Address:</b> {{userAddress.address}}</p>
+
+        <p><b class="text-warning">City:</b> {{userAddress.city}}</p>
+
+        <p><b class="text-warning">Pincode:</b> {{userAddress.pincode}}</p>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- UPI -->
+
+    <div *ngIf="selectedMode==='UPI'" class="payment-section">
+
+      <h5>Select UPI App</h5>
+
+      <select class="upi-select" [(ngModel)]="selectedUpi" name="upi">
+
+        <option value="">Select App</option>
+        <option>GPay</option>
+        <option>PhonePe</option>
+        <option>Paytm</option>
+
+      </select>
+
+    </div>
+    <!-- UPI QR CODE -->
+
+    <div *ngIf="selectedMode==='UPI' && selectedUpi" class="payment-section text-center">
+
+      <h5 class="text-warning mb-3">
+        Scan QR to Pay
+      </h5>
+
+      <img [src]="'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=DemoPayment-'+totalAmount"
+        class="qr-img">
+
+      <p class="text-white mt-2">
+        Pay using {{selectedUpi}}
+      </p>
+
+      <p class="text-warning mt-2">
+        Demo QR Code (No Real Payment)
+      </p>
+
+    </div>
+
+
+
+    <!-- CARD -->
+
+    <div *ngIf="selectedMode==='Debit Card' || selectedMode==='Credit Card'" class="payment-section">
+
+      <h5>Card Details</h5>
+
+      <input class="input-box" placeholder="Card Number" [(ngModel)]="card.number" name="cardNumber">
+
+      <input class="input-box" placeholder="Card Holder Name" [(ngModel)]="card.name" name="cardName">
+
+      <div class="row-box">
+
+        <input class="input-box" placeholder="MM/YY" [(ngModel)]="card.expiry" name="expiry">
+
+        <input class="input-box" placeholder="CVV" [(ngModel)]="card.cvv" name="cvv">
+
+      </div>
+
+    </div>
+
+
+
+    <!-- PAY BUTTON -->
+
+    <button class="pay-btn" (click)="confirmPayment()" [disabled]="!userAddress?.address"
+      [style.opacity]="!userAddress?.address ? '0.6' : '1'">
+
+      Pay ₹ {{totalAmount}}
+
+    </button>
+
+
+
+    <!-- ADD ADDRESS WARNING -->
+
+    <div *ngIf="!userAddress?.address" class="text-center mt-3">
+
+      <div class="text-danger mb-2">
+
+        ⚠ Please add delivery address to continue
+
+      </div>
+
+      <button class="address-btn btn btn-warning" (click)="goToProfile()">
+
+        Add Address
+
+      </button>
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- PRODUCT DETAILS -->
+
+  <div class="product-section">
+
+    <h5 class="text-warning mb-3">
+      Order Items
+    </h5>
+
+    <div class="product-item" *ngFor="let item of cartItems">
+
+      <img [src]="item.image" class="product-img">
+
+      <div class="product-info">
+
+        <div class="product-name">
+          {{item.name}}
+        </div>
+
+        <div class="product-brand">
+          Brand: {{item.brand}}
+        </div>
+
+        <div class="product-qty">
+          Qty : {{item.quantity}}
+        </div>
+
+      </div>
+
+      <div class="product-price">
+        ₹ {{item.price * item.quantity}}
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

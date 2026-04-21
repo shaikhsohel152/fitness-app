@@ -1,0 +1,153 @@
+<div class="container my-5 contact-page">
+
+  <!-- PAGE HEADING -->
+  <div class="text-center mb-5 page-heading">
+    <h1 class="fw-bolder text-light">Contact GymGear Pro</h1>
+    <p class="text-muted fst-italic">
+      We’re here to help you train better. Reach out anytime.
+    </p>
+  </div>
+
+  <div class="row g-5">
+
+    <!-- CONTACT FORM -->
+    <div class="col-lg-6 d-flex">
+      <div class="card shadow-lg border-0 rounded-4 w-100">
+        <div class="card-body p-4">
+
+          <h4 class="fw-bold mb-3 text-light">Send Us a Message</h4>
+          <p class="text-muted mb-4">
+            Have questions about gym equipment or orders? Drop us a message.
+          </p>
+
+          <form [formGroup]="mouseForm" (ngSubmit)="onSubmit()">
+
+            <!-- <div class="mb-3">
+              <label class="form-label fw-semibold">Full Name</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="name"
+                placeholder="Enter your name">
+              <small class="text-danger"
+                *ngIf="mouseForm.get('name')?.invalid && mouseForm.get('name')?.touched">
+                Name is required
+              </small>
+            </div> -->
+            <div class="mb-3">
+              <label class="form-label">Full Name</label>
+
+              <input type="text" class="form-control" placeholder="Enter your name" formControlName="name" />
+
+              <div class="text-danger mt-1" *ngIf="mouseForm.get('name')?.dirty || mouseForm.get('name')?.touched">
+                <span *ngIf="mouseForm.get('name')?.errors?.['required']">
+                  Name is required
+                </span>
+
+                <span *ngIf="mouseForm.get('name')?.errors?.['pattern']">
+                  Only letters are allowed
+                </span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Email Address</label>
+              <input type="email" class="form-control" formControlName="email" placeholder="example@email.com">
+              <small class="text-danger" *ngIf="mouseForm.get('email')?.invalid && mouseForm.get('email')?.touched">
+                Enter a valid email
+              </small>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Message</label>
+              <textarea rows="5" class="form-control" formControlName="message"
+                placeholder="Type your message here..."></textarea>
+              <small class="text-danger" *ngIf="mouseForm.get('message')?.invalid && mouseForm.get('message')?.touched">
+                Message is required
+              </small>
+            </div>
+
+            <button type="submit" class="btn btn-warning w-100 fw-bold" [disabled]="mouseForm.invalid">
+              Send Message
+            </button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT INFO -->
+    <div class="col-lg-6 d-flex">
+      <div class="card shadow-lg border-0 rounded-4 w-100">
+        <div class="card-body p-4">
+
+          <h4 class="fw-bold mb-4 text-light">Contact Information</h4>
+
+          <p class="mb-3">
+            <i class="fas fa-map-marker-alt text-warning me-2"></i>
+            <strong>Address:</strong> GymGear Pro Fitness Center,<br>
+        Tardeo, Mumbai, Maharastra – 400034
+          </p>
+
+          <p class="mb-3">
+            <i class="fas fa-phone text-warning me-2"></i>
+            <strong>Phone:</strong> +91 84336 97074
+          </p>
+
+          <p class="mb-3">
+            <i class="fas fa-envelope text-warning me-2"></i>
+            <strong>Email:</strong> gymgearpro@gmail.com
+          </p>
+
+          <p class="mb-4">
+            <i class="fas fa-clock text-warning me-2"></i>
+            <strong>Hours:</strong> Mon–Fri 9AM–6PM | Sat 10AM–4PM
+          </p>
+
+          <hr>
+
+          <!-- SOCIAL LINKS -->
+          <h6 class="fw-bold mb-3">Follow Us</h6>
+          <div class="d-flex justify-content-center justify-content-lg-start gap-3">
+            <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
+            <a href="#"><i class="fab fa-instagram fa-2x"></i></a>
+            <a href="#"><i class="fab fa-twitter fa-2x"></i></a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MAP SECTION -->
+  <div class="row mt-5">
+    <div class="col-12">
+      <h1 class="fw-bolder text-center mb-4 text-light map-title">
+        Our Location
+      </h1>
+
+      <div class="ratio ratio-16x9 rounded-4 shadow-lg overflow-hidden">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.117040288724!2d72.8135707!3d18.9704378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7cf6721dd9bbb%3A0xc3152bdd89cc0600!2sGanesh%20Building%20B2F!5e0!3m2!1sen!2sin!4v1772387450316!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="lazy" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===================== SHORT FOOTER ===================== -->
+<footer class="short-footer bg-dark text-light mt-5 py-3">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+    
+    <div class="mb-2 mb-md-0">
+      <strong><i class="fas fa-dumbbell me-2 text-warning"></i>GymGear Pro</strong> &copy; 2026. All rights reserved.
+    </div>
+
+    <!-- <div class="d-flex gap-3">
+      <a href="#" class="footer-icon"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="footer-icon"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="footer-icon"><i class="fab fa-twitter"></i></a>
+    </div> -->
+
+  </div>
+</footer>

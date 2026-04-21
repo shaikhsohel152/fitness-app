@@ -1,0 +1,61 @@
+<!-- DETAIL PRODUCT PAGE WRAPPER -->
+<div class="detail-product-page m-3">
+
+  <!-- BREADCRUMB -->
+  <nav aria-label="breadcrumb" class="breadcrumb-nav p-3 rounded shadow-sm mb-5">
+    <ol class="breadcrumb mb-0">
+      <li class="breadcrumb-item">
+        <a routerLink="/home" class="text-decoration-none">
+          Home
+        </a>
+      </li>
+      <li class="breadcrumb-item active">
+        {{ product?.brand || 'Product' }}
+      </li>
+    </ol>
+  </nav>
+
+  <!-- PRODUCT DETAILS SECTION -->
+  <div class="container" *ngIf="product; else loading">
+    <div class="row g-5 align-items-center">
+
+      <!-- PRODUCT MAIN IMAGE -->
+      <div class="col-lg-6 text-center">
+        <img [src]="product?.imgsrc" alt="{{ product?.brand }}" class="product-main-img">
+      </div>
+
+      <!-- PRODUCT INFO -->
+      <div class="col-lg-6">
+        <h2 class="product-brand">{{ product?.brand }}</h2>
+        <p class="product-description">{{ product?.description }}</p>
+        <h3 class="product-price">₹ {{ product?.price }}</h3>
+        <p class="product-category">
+          Category: <span>{{ product?.category }}</span>
+        </p>
+        <p class="product-rating">Rating ⭐ : {{ product?.rating }}</p>
+
+        <button class="btn-add-cart w-100 mt-4" (click)="addToCart()" routerLink="/cart">
+          Add To Cart
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOADING TEMPLATE -->
+  <ng-template #loading>
+    <div class="text-center mt-5">
+      <h4>Loading Product...</h4>
+    </div>
+  </ng-template>
+
+  <!-- ADDITIONAL IMAGES -->
+  <div class="additional-images container my-5" *ngIf="product?.additionalImages?.length">
+    <h5>More Images</h5>
+    <div class="d-flex flex-wrap gap-3 justify-content-center">
+      <div *ngFor="let img of product.additionalImages">
+        <img [src]="img" class="additional-img" alt="Additional Image">
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,91 @@
+<div class="orders-container">
+
+    <!-- TITLE -->
+
+    <h2 class="title mt-lg-5">
+        My Orders
+    </h2>
+
+
+    <!-- BACK BUTTON -->
+
+    <button class="back-btn" (click)="goBack()">
+        ← Back to Profile
+    </button>
+
+
+    <!-- NO ORDERS -->
+
+    <div *ngIf="orders.length==0" class="no-orders">
+
+        No Orders Found
+
+    </div>
+
+
+    <!-- ORDER LIST -->
+
+    <div *ngFor="let order of orders" class="order-card">
+
+
+        <!-- TOP DETAILS -->
+
+        <div class="order-top">
+
+            <div>
+
+                <p class="label">Order Date</p>
+                <p>{{order.date}}</p>
+
+            </div>
+
+
+            <div>
+
+                <p class="label">Total Price</p>
+                <p class="price">₹ {{order.price}}</p>
+
+            </div>
+
+
+            <div>
+
+                <p class="label">Quantity</p>
+                <p>{{order.quantity}}</p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PRODUCT SECTION -->
+
+        <div class="order-body">
+
+            <img [src]="order.image" class="product-img">
+
+
+
+            <div class="product-details">
+
+                <p>
+
+                    Product :
+
+
+                </p>
+                <h4>{{order.brand}}</h4>
+
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>

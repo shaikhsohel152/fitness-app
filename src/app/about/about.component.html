@@ -1,0 +1,87 @@
+<div class="about-container m-5">
+
+  <!-- HERO -->
+  <section class="about-hero">
+    
+    <h1>About <span class="fas fa-dumbbell hero-icon"></span> GymGear Pro</h1>
+    <p class="hero-sub">{{ missionStatement }}</p>
+  </section>
+
+  <!-- STORY -->
+  <section class="about-section glass">
+    <h2>Our Story</h2>
+    <p>{{ story }}</p>
+    <p>
+      GymGear Pro emerged stronger after every challenge. From smart resistance
+      bands with real-time tracking to eco-friendly gym accessories, we focus
+      on innovation, performance, and sustainability.
+    </p>
+    <p>
+      Our community-driven approach includes expert blogs, virtual challenges,
+      and personalized fitness guidance—because your growth is our mission.
+    </p>
+  </section>
+
+  <!-- VALUES -->
+  <section class="about-section">
+    <h2>Our Core Values</h2>
+
+    <div class="values-grid">
+      <div class="value-card" *ngFor="let value of values">
+        <h3>{{ value.title }}</h3>
+        <p>{{ value.description }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="about-section glass">
+    <h2>Founder & CEO</h2>
+    <p class="section-sub">
+      A passionate team of fitness professionals building tools for real athletes.
+    </p>
+
+    <div class="team-grid">
+      <div class="team-card" *ngFor="let member of team">
+        <h3>{{ member.name }}</h3>
+        <span>{{ member.role }}</span>
+        <p>{{ member.bio }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section class="about-section">
+    <h2>Our Achievements</h2>
+    <ul class="achievement-list">
+      <li *ngFor="let achievement of achievements">{{ achievement }}</li>
+    </ul>
+  </section>
+
+  <!-- CONTACT CTA -->
+  <section class="about-cta">
+    <h2>Get in Touch</h2>
+    <p>
+      Questions? Stories? Let’s talk fitness.
+    </p>
+
+    <div class="cta-info">
+      <span>📧 gymgearpro@gmail.com</span>
+      <span>📞 +91 8433697074</span>
+      <span>📸 @GymGearPro</span>
+    </div>
+
+    <button routerLink="/contact" class="btn btn-warning">
+      Contact Us
+    </button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="about-footer">
+    <p>
+      Ready to upgrade your workouts?
+      <a routerLink="/products">Shop GymGear Pro</a>
+    </p>
+  </footer>
+
+</div>

@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-black shadow-lg">
+  <div class="container">
+
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold d-flex align-items-center" routerLink="/home">
+      <i class="fas fa-dumbbell me-2 text-warning"></i>
+      GymGear Pro
+    </a>
+
+    <!-- Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Content -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <!-- Center Menu -->
+      <ul class="navbar-nav mx-auto gap-3 text-uppercase fw-semibold text-center text-lg-start">
+        <li class="nav-item"><a class="nav-link" routerLink="/home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/product">Products</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/cardio">Gym</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/gym">Personal Training</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/about">About</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/contact">Contact</a></li>
+      </ul>
+
+      <!-- Right Icons -->
+      <ul class="navbar-nav align-items-center gap-3 ms-lg-auto">
+
+        <!-- 🔍 SEARCH (ICON → INPUT) -->
+        <li class="nav-item search-morph">
+
+          <!-- ICON STATE -->
+          <a class="nav-link" *ngIf="!showSearch" (click)="openSearch()" style="cursor:pointer">
+            <i class="fas fa-search"></i>
+          </a>
+
+          <!-- INPUT STATE -->
+          <input *ngIf="showSearch" type="text" class="search-input" placeholder="Search products..."
+            [(ngModel)]="searchText" (ngModelChange)="onSearch()" (blur)="closeSearch()" autofocus />
+
+        </li>
+
+
+        <!-- 🛒 Cart -->
+        <li class="nav-item position-relative">
+          <a class="nav-link" routerLink="/cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="badge bg-warning text-dark position-absolute top-0 start-100 translate-middle"
+              *ngIf="cartCount > 0">
+              {{ cartCount }}
+            </span>
+          </a>
+        </li>
+
+        <!-- 👤 Profile -->
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2" style="cursor:pointer" (click)="openProfile()">
+
+            <!-- Logged in -->
+            <ng-container *ngIf="isLoggedIn; else guest">
+              <span class="fw-semibold text-capitalize">
+                👋 {{ userName }}
+              </span>
+            </ng-container>
+
+            <!-- Not logged in -->
+            <ng-template #guest>
+              <i class="fas fa-user"></i>
+            </ng-template>
+
+          </a>
+        </li>
+
+
+
+      </ul>
+    </div>
+  </div>
+</nav>

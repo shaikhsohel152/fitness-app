@@ -1,0 +1,133 @@
+<div class="profile-dashboard">
+
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+
+    <!-- Avatar + Basic Info -->
+    <div class="profile-card">
+      <div class="text-center mb-3">
+        <div class="profile-avatar mb-2">
+          <i class="fas fa-user"></i>
+        </div>
+        <h4 class="text-warning mb-0">{{ user?.name }}</h4>
+        <small class="text-muted">Logged-in Member</small>
+      </div>
+
+      <hr class="text-secondary">
+
+      <!-- User Info -->
+      <div class="user-info mt-3">
+        <p><i class="fas fa-envelope text-warning me-2"></i>{{ user?.email }}</p>
+        <p><i class="fas fa-phone text-warning me-2"></i>{{ user?.phone || 'Not provided' }}</p>
+      </div>
+
+      <hr class="text-secondary">
+
+      <!-- Gym Info -->
+      <div class="gym-info mt-3">
+        <h6 class="text-warning mb-3">
+          <i class="fas fa-dumbbell me-2"></i>Gym Contact Details
+        </h6>
+
+        <p>
+          <i class="fas fa-phone-alt text-warning me-2"></i>
+          +91 8433697074
+        </p>
+
+        <p>
+          <i class="fas fa-envelope text-warning me-2"></i>
+          @gymgearpro@gmail.com
+        </p>
+
+        <p>
+          <i class="fas fa-map-marker-alt text-warning me-2"></i>
+          GymGear Pro Fitness Center,<br>
+          Tardeo, Mumbai, Maharastra – 400034
+        </p>
+
+        <a href="https://maps.app.goo.gl/AHjwjbZQV6Yn76ME9" target="_blank"
+          class="btn btn-outline-warning btn-sm mt-2 w-100">
+          <i class="fas fa-location-arrow me-2"></i>View Location
+        </a>
+      </div>
+
+      <div class="d-grid mt-4">
+        <button class="btn btn-danger btn-lg" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+
+    <!-- Address + City + Pincode Card -->
+    <div class="profile-card address-card">
+      <h6 class="text-warning mb-3"><i class="fas fa-map-marker-alt me-2"></i>Address Details</h6>
+
+      <!-- View Mode -->
+      <div *ngIf="!editAddress">
+        <p *ngIf="user?.address; else noAddress">{{ user.address }}</p>
+        <p *ngIf="user?.city">City: {{ user.city }}</p>
+        <p *ngIf="user?.pincode">Pincode: {{ user.pincode }}</p>
+
+        <ng-template #noAddress>
+          <p class="text-danger small">Address is required. Please add your address.</p>
+        </ng-template>
+
+        <button class="btn-edit" (click)="editAddress = true">
+          <i class="fas fa-edit me-1"></i>
+          {{ user?.address ? 'Edit Address' : 'Add Address' }}
+        </button>
+      </div>
+
+      <!-- Edit Mode -->
+      <div *ngIf="editAddress">
+        <textarea class="form-control mb-2" rows="3" [(ngModel)]="addressInput" placeholder="Enter your full address"
+          required></textarea>
+
+        <input type="text" class="form-control mb-2" [(ngModel)]="cityInput" placeholder="Enter your city" required />
+
+        <input type="text" class="form-control mb-2" [(ngModel)]="pincodeInput" placeholder="Enter your pincode"
+          maxlength="6" required />
+
+        <button class="btn-save w-100 mb-2" (click)="saveAddress()">Save</button>
+        <button class="btn-cancel w-100" (click)="cancelEdit()">Cancel</button>
+      </div>
+    </div>
+
+    <!-- MY ORDERS BUTTON -->
+
+<div class="profile-card order-btn-card">
+
+  <button
+  class="btn-myorders"
+  (click)="goToOrders()">
+
+  <i class="fas fa-box me-2"></i>
+  My Orders
+
+  </button>
+
+</div>
+
+  </div>
+
+
+</div>
+
+
+
+
+<!-- FOOTER -->
+<footer class="short-footer bg-dark text-light mt-5 py-3">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div>
+      <strong><i class="fas fa-dumbbell me-2 text-warning"></i>GymGear Pro</strong>
+      &copy; 2026. All rights reserved.
+    </div>
+    <div class="small text-light">
+      <i class="fas fa-map-marker-alt text-warning me-1"></i> Mumbai, Maharashtra
+      <i class="fas fa-phone-alt text-warning mx-1"></i> +91 8433697074
+    </div>
+  </div>
+</footer>

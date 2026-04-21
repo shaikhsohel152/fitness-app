@@ -1,0 +1,131 @@
+<div class="container" style="padding-top: 30px;">
+  <div class="row g-4 mt-4">
+
+    <!-- 🔍 PRODUCTS -->
+    <div
+      class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12"
+      *ngFor="let element of filteredProducts">
+
+      <div class="card bg-dark text-light shadow-lg h-100 product-card">
+
+        <!-- IMAGE CLICK -->
+        <a
+          [routerLink]="['/detailproduct', element.id]"
+          class="product-img-wrapper">
+
+          <img
+            [src]="element?.imgsrc"
+            class="card-img-top product-image"
+            [alt]="element?.brand">
+        </a>
+
+        <div class="card-body p-3 d-flex flex-column">
+
+          <h5 class="fw-bold mb-1 text-truncate">
+            {{ element?.brand }}
+          </h5>
+
+          <p class="small text-muted mb-2">
+            {{ element?.bougth }}
+          </p>
+
+          <p class="small mb-3">
+            Discount: {{ element?.discountPercentage }}
+          </p>
+
+          <div class="mt-auto d-flex justify-content-between align-items-center">
+
+            <span class="fw-bold text-warning">
+              ₹ {{ element?.price }}
+            </span>
+
+            <div>
+              ⭐ {{ element?.rating }}
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ❌ NO PRODUCT FOUND -->
+    <div
+      class="col-12 text-center text-light mt-5"
+      *ngIf="filteredProducts?.length === 0">
+
+      <h4 class="text-warning">No products found 😕</h4>
+      <p class="text-muted">Try searching with a different name</p>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer bg-dark text-light mt-5 pt-5 pb-4">
+  <div class="container">
+    <div class="row">
+
+      <!-- BRAND -->
+      <div class="col-md-4 mb-4">
+        <h3 class="fw-bold text-warning mb-3">
+          <i class="fas fa-dumbbell me-2 text-warning"></i>GymGear Pro
+        </h3>
+        <p class="small text-muted">
+          Your ultimate fitness partner. High quality gym gear to keep you strong and motivated.
+        </p>
+      </div>
+
+      <!-- QUICK LINKS -->
+      <div class="col-md-2 mb-4">
+        <h5 class="fw-bold mb-3">Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a routerLink="/home" class="footer-link">Home</a></li>
+          <li><a routerLink="/about" class="footer-link">About</a></li>
+          <li><a routerLink="/contact" class="footer-link">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- SUPPORT -->
+      <div class="col-md-3 mb-4">
+        <h5 class="fw-bold mb-3">Support</h5>
+        <ul class="list-unstyled">
+          <li><a routerLink="/faq" class="footer-link">FAQ</a></li>
+          <li><a routerLink="/terms" class="footer-link">Terms & Conditions</a></li>
+          <li><a routerLink="/privacy" class="footer-link">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="col-md-3 mb-4">
+        <h5 class="fw-bold mb-3">Contact Us</h5>
+        <p class="small mb-1">
+          <i class="fas fa-envelope me-2 text-warning"></i> gymgearpro@gmail.com
+        </p>
+        <p class="small mb-1">
+          <i class="fas fa-phone me-2 text-warning"></i> +91 84336 97074
+        </p>
+        <p class="small">
+          <i class="fas fa-map-marker-alt me-2 text-warning"></i>
+          GymGear Pro Fitness Center,<br>
+          Tardeo, Mumbai, Maharastra – 400034
+        </p>
+        <div class="mt-2">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="bg-secondary">
+
+    <div class="row">
+      <div class="col text-center">
+        <p class="small mb-0">&copy; 2026 GymGear Pro. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>

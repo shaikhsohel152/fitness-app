@@ -1,0 +1,138 @@
+/* PAGE */
+
+.orders-container{
+max-width:900px;
+margin:auto;
+padding:30px;
+color:white;
+}
+
+
+/* TITLE */
+
+.title{
+text-align:center;
+margin-bottom:20px;
+font-weight:600;
+}
+
+
+/* BACK BUTTON */
+
+.back-btn{
+margin-bottom:20px;
+padding:8px 20px;
+border:none;
+background:#ffc107;
+color:black;
+border-radius:6px;
+font-weight:600;
+cursor:pointer;
+}
+
+.back-btn:hover{
+background:#e0a800;
+}
+
+
+
+/* NO ORDERS */
+
+.no-orders{
+text-align:center;
+margin-top:50px;
+font-size:18px;
+color:#bbb;
+}
+
+
+
+/* ORDER CARD */
+
+.order-card{
+
+background:#1b1b1b;
+border-radius:12px;
+padding:20px;
+margin-bottom:20px;
+box-shadow:0 4px 15px rgba(0,0,0,0.4);
+
+}
+
+
+
+/* TOP SECTION */
+
+.order-top{
+
+display:flex;
+justify-content:space-between;
+margin-bottom:15px;
+border-bottom:1px solid #333;
+padding-bottom:10px;
+
+}
+
+
+.label{
+
+color:#aaa;
+font-size:13px;
+margin-bottom:2px;
+
+}
+
+
+.price{
+
+color:#00e676;
+font-weight:bold;
+font-size:18px;
+
+}
+
+
+
+/* PRODUCT SECTION */
+
+.order-body{
+
+display:flex;
+align-items:center;
+gap:20px;
+
+}
+
+
+
+/* PRODUCT IMAGE */
+
+.product-img{
+
+width:90px;
+height:90px;
+object-fit:contain;
+background:white;
+border-radius:8px;
+padding:5px;
+
+}
+
+
+
+/* PRODUCT DETAILS */
+
+.product-details h4{
+
+margin:0;
+font-size:18px;
+font-weight:600;
+
+}
+
+.product-details p{
+
+margin:3px 0;
+color:#bbb;
+
+}

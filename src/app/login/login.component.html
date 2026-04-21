@@ -1,0 +1,76 @@
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center px-3" style="padding-top: 56px;">
+  <div class="row w-100 justify-content-center">
+
+    <div class="col-12 col-sm-10 col-md-6 col-lg-5 col-xl-4">
+      <div class="card bg-dark text-light shadow-lg rounded-4">
+
+        <div class="card-body p-4 p-sm-5">
+
+          <h2 class="text-center fw-bold text-warning mb-4 fs-3 fs-sm-2">
+            Sign In To GymGearPro 💪
+          </h2>
+
+          <form class="d-flex flex-column gap-3" [formGroup]="loginForm" (ngSubmit)="handleLogin()">
+
+            <!-- ✅ NAME -->
+            <div>
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-control form-control-lg" placeholder="Enter your name"
+                formControlName="name" />
+
+              <small class="text-danger" *ngIf="loginForm.get('name')?.touched && loginForm.get('name')?.invalid">
+                Only letters allowed
+              </small>
+            </div>
+
+            <!-- EMAIL -->
+            <div>
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control form-control-lg" placeholder="Enter your email"
+                formControlName="email" />
+
+              <small class="text-danger" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+                Enter valid email
+              </small>
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="mb-3 password-wrapper">
+              <label class="form-label">Password</label>
+
+              <div class="input-eye-wrapper">
+                <input [type]="showPassword ? 'text' : 'password'" class="form-control pe-5"
+                  placeholder="Enter password" formControlName="password" />
+
+                <span class="eye-icon" (click)="togglePassword()">
+                  {{ showPassword ? '🙈' : '👁️' }}
+                </span>
+              </div>
+
+              <span class="text-danger" *ngIf="loginForm.get('password')?.touched &&
+         loginForm.get('password')?.invalid">
+                Password must be at least 8 characters
+              </span>
+
+            </div>
+
+            <p class="text-center mt-0">
+              New User?
+              <a routerLink="/profile" class="text-warning fw-semibold">Registration</a>
+            </p>
+
+            <!-- BUTTON -->
+            <button type="submit" class="btn btn-warning w-100 fw-bold py-2 fs-6 fs-sm-5"
+              [disabled]="loginForm.invalid">
+              Login
+            </button>
+
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

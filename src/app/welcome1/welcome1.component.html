@@ -1,0 +1,39 @@
+
+//This component used in Login component
+
+
+<div class="welcome-overlay">
+
+  <div class="welcome-card animate">
+
+    <!-- CLOSE BUTTON -->
+    <button class="close-btn" (click)="closePage()">✕</button>
+
+    <!-- MAIN HEADING -->
+    <h1>
+      Welcome to <span>GYMGEARPRO</span> 💪
+    </h1>
+
+    <!-- USER NAME -->
+    <h3 class="user-name" *ngIf="userName">
+      Welcome back, <span>{{ userName }}</span> 🔥
+    </h3>
+
+    <p>
+      Your journey toward discipline, strength, and confidence starts here.
+    </p>
+
+    <div class="divider"></div>
+
+    <p class="sub-text">
+      Train smarter, push harder, and unlock your true potential with
+      expert coaching and world-class equipment.
+    </p>
+
+    <!-- CTA BUTTON -->
+    <button class="start-btn" routerLink="/home">
+      Explore →
+    </button>
+
+  </div>
+</div>

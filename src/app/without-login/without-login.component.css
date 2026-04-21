@@ -1,0 +1,99 @@
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+
+.modal-card {
+  width: 420px;                
+  max-width: 90%;
+  padding: 32px 28px;
+  border-radius: 18px;
+  text-align: center;
+  background: linear-gradient(145deg, #2a2a2a, #1b1b1b);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9);
+  color: #fff;
+  animation: scaleUp 0.35s ease;
+}
+
+
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #ff4d4d;
+  margin-bottom: 8px;
+}
+
+
+.info-text {
+  color: #d0d0d0;
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+
+.login-btn {
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #000;
+  box-shadow: 0 8px 25px rgba(251, 191, 36, 0.6);
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(251, 191, 36, 0.9);
+}
+
+
+.cancel-btn {
+  padding: 12px 26px;
+  border-radius: 30px;
+  border: 1px solid #666;
+  background: transparent;
+  color: #ccc;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background: #555;
+  color: #fff;
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.88);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

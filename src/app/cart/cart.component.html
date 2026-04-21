@@ -1,0 +1,183 @@
+<!-- Gym Cart Page -->
+
+<div class="container my-5" *ngIf="cartItems.length > 0; else emptyCart">
+
+  <h2 class="text-center text-uppercase fw-bold text-warning" style="padding-top: 50px;">
+    Your Gym Cart
+  </h2>
+
+  <div class="row" *ngFor="let item of cartItems">
+
+    <div class="col-12">
+
+      <div class="card bg-dark text-light shadow-lg rounded-4 mb-4">
+
+        <div class="card-body">
+
+          <div class="row align-items-center">
+
+            <!-- ✅ Product Image -->
+            <div class="col-md-2 text-center">
+
+              <img [src]="item.image" class="img-fluid rounded" style="max-width:120px; height:120px; object-fit:cover;"
+                alt="product" />
+
+            </div>
+
+
+            <!-- Product Info -->
+            <div class="col-md-4">
+
+              <h5 class="fw-bold">
+                {{item.brand}}
+              </h5>
+
+              <p class="mb-1">
+                Rating ⭐ {{item.rating}}
+              </p>
+
+              <p class="mb-1">
+                Bought {{item.bougth}}
+              </p>
+
+            </div>
+
+
+            <!-- Quantity -->
+            <div class="col-md-2 text-center">
+
+              <label class="small text-uppercase mb-1 d-block">
+                Qty
+              </label>
+
+              <div class="d-flex justify-content-center">
+
+                <button class="btn btn-outline-warning btn-sm" (click)="decrease(item)">
+                  -
+                </button>
+
+                <input type="number" [value]="item.quantity" readonly class="form-control text-center mx-2"
+                  style="width:60px">
+
+                <button class="btn btn-outline-warning btn-sm" (click)="increase(item)">
+                  +
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <!-- Price -->
+            <div class="col-md-2 text-center">
+
+              <label class="small text-uppercase">
+                Price
+              </label>
+
+              <h5 class="mt-2">
+
+                ₹ {{item.price * item.quantity}}
+
+              </h5>
+
+            </div>
+
+
+            <!-- Remove -->
+            <div class="col-md-2 text-center">
+
+              <button class="btn btn-danger btn-sm" (click)="remove(item)">
+
+                Remove
+
+              </button>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Total -->
+
+  <div class="row justify-content-end">
+
+    <div class="col-md-4">
+
+      <div class="card bg-dark text-light p-3">
+
+        <h5 class="d-flex justify-content-between">
+
+          <span>Subtotal</span>
+
+          <span>
+            ₹ {{getTotal()}}
+          </span>
+
+        </h5>
+
+        <h6 class="d-flex justify-content-between">
+
+          <span>Delivery</span>
+
+          <span class="text-success">
+            Free
+          </span>
+
+        </h6>
+
+        <hr>
+
+        <h4 class="d-flex justify-content-between text-warning">
+
+          <span>Total</span>
+
+          <span>
+            ₹ {{getTotal()}}
+          </span>
+
+        </h4>
+
+
+        <button (click)="proceedToCheckout()" class="btn btn-warning">
+          Proceed to Checkout
+        </button>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- Empty Cart -->
+
+<ng-template #emptyCart>
+
+  <div class="d-flex justify-content-center align-items-center flex-column" style="height:90vh;">
+
+    <h2 class="text-light">
+      Your cart is empty
+    </h2>
+
+    <button class="btn btn-warning mt-3" routerLink="/product">
+
+      Shop Now
+
+    </button>
+
+  </div>
+
+</ng-template>
