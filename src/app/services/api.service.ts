@@ -43,7 +43,7 @@ export interface Request {
 export class ApiService {
 
   // Backend URL
-  private BASE_URL = 'http://localhost:5000';
+ private BASE_URL = 'https://gymgearpro-api.onrender.com';
 
   constructor(private http: HttpClient) { }
 

@@ -22,7 +22,7 @@ export interface Product {
 export class ProductService {
 
   // ✅ Node + MongoDB Backend URL
-  private url = 'http://localhost:5000/products';
+  private url = 'https://gymgearpro-api.onrender.com/products';
 
   constructor(private http: HttpClient) { }
 
