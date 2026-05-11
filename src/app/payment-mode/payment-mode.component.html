@@ -1,192 +1,285 @@
-<div class="payment-wrapper container mt-5 pt-5">
+<div class="payment-page">
 
-  <div class="payment-card mx-auto">
+  <div class="payment-container">
 
-    <h3 class="title text-center mb-3">
-      Select Payment Method
-    </h3>
+    <!-- LEFT -->
 
-    <div class="amount-box text-center mb-4 text-white">
-      Total Amount
-      <div class="price">₹ {{ totalAmount }}</div>
-    </div>
+    <div class="payment-left">
 
+      <!-- TITLE -->
 
-    <!-- Payment Options -->
+      <div class="top-section">
 
-    <div class="payment-buttons">
+        <div>
 
-      <button class="mode-btn" (click)="selectMode('COD')">
-        🚚 Cash on Delivery
-      </button>
+          <h1 class="main-title">
+            Secure Checkout
+          </h1>
 
-      <button class="mode-btn" (click)="selectMode('UPI')">
-        📱 UPI Payment
-      </button>
+          <p class="sub-title">
+            Complete your order securely
+          </p>
 
-      <button class="mode-btn" (click)="selectMode('Debit Card')">
-        💳 Debit Card
-      </button>
-
-      <button class="mode-btn" (click)="selectMode('Credit Card')">
-        💳 Credit Card
-      </button>
-
-    </div>
-
-
-    <!-- COD ADDRESS SHOW -->
-
-    <!-- DELIVERY ADDRESS SHOW ALL MODES -->
-    <div *ngIf="selectedMode" class="alert alert-info text-center">
-      Selected Payment Mode: <b>{{ selectedMode }}</b>
-    </div>
-
-    <div *ngIf="userAddress?.address" class="payment-section text-warning">
-
-      <h5>Delivery Address</h5>
-
-      <div class="address-box text-white">
-
-        <p><b class="text-warning">Name:</b> {{userAddress.name}}</p>
-
-        <p><b class="text-warning">Address:</b> {{userAddress.address}}</p>
-
-        <p><b class="text-warning">City:</b> {{userAddress.city}}</p>
-
-        <p><b class="text-warning">Pincode:</b> {{userAddress.pincode}}</p>
-
-      </div>
-
-    </div>
-
-
-
-    <!-- UPI -->
-
-    <div *ngIf="selectedMode==='UPI'" class="payment-section">
-
-      <h5>Select UPI App</h5>
-
-      <select class="upi-select" [(ngModel)]="selectedUpi" name="upi">
-
-        <option value="">Select App</option>
-        <option>GPay</option>
-        <option>PhonePe</option>
-        <option>Paytm</option>
-
-      </select>
-
-    </div>
-    <!-- UPI QR CODE -->
-
-    <div *ngIf="selectedMode==='UPI' && selectedUpi" class="payment-section text-center">
-
-      <h5 class="text-warning mb-3">
-        Scan QR to Pay
-      </h5>
-
-      <img [src]="'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=DemoPayment-'+totalAmount"
-        class="qr-img">
-
-      <p class="text-white mt-2">
-        Pay using {{selectedUpi}}
-      </p>
-
-      <p class="text-warning mt-2">
-        Demo QR Code (No Real Payment)
-      </p>
-
-    </div>
-
-
-
-    <!-- CARD -->
-
-    <div *ngIf="selectedMode==='Debit Card' || selectedMode==='Credit Card'" class="payment-section">
-
-      <h5>Card Details</h5>
-
-      <input class="input-box" placeholder="Card Number" [(ngModel)]="card.number" name="cardNumber">
-
-      <input class="input-box" placeholder="Card Holder Name" [(ngModel)]="card.name" name="cardName">
-
-      <div class="row-box">
-
-        <input class="input-box" placeholder="MM/YY" [(ngModel)]="card.expiry" name="expiry">
-
-        <input class="input-box" placeholder="CVV" [(ngModel)]="card.cvv" name="cvv">
-
-      </div>
-
-    </div>
-
-
-
-    <!-- PAY BUTTON -->
-
-    <button class="pay-btn" (click)="confirmPayment()" [disabled]="!userAddress?.address"
-      [style.opacity]="!userAddress?.address ? '0.6' : '1'">
-
-      Pay ₹ {{totalAmount}}
-
-    </button>
-
-
-
-    <!-- ADD ADDRESS WARNING -->
-
-    <div *ngIf="!userAddress?.address" class="text-center mt-3">
-
-      <div class="text-danger mb-2">
-
-        ⚠ Please add delivery address to continue
-
-      </div>
-
-      <button class="address-btn btn btn-warning" (click)="goToProfile()">
-
-        Add Address
-
-      </button>
-
-    </div>
-
-
-  </div>
-
-
-
-  <!-- PRODUCT DETAILS -->
-
-  <div class="product-section">
-
-    <h5 class="text-warning mb-3">
-      Order Items
-    </h5>
-
-    <div class="product-item" *ngFor="let item of cartItems">
-
-      <img [src]="item.image" class="product-img">
-
-      <div class="product-info">
-
-        <div class="product-name">
-          {{item.name}}
         </div>
 
-        <div class="product-brand">
-          Brand: {{item.brand}}
-        </div>
+        <div class="amount-box">
 
-        <div class="product-qty">
-          Qty : {{item.quantity}}
+          <span>Total Amount</span>
+
+          <h2>
+            ₹ {{totalAmount}}
+          </h2>
+
         </div>
 
       </div>
 
-      <div class="product-price">
-        ₹ {{item.price * item.quantity}}
+      <!-- PAYMENT METHODS -->
+
+      <div class="premium-card">
+
+        <h3 class="section-title">
+          Select Payment Method
+        </h3>
+
+        <div class="payment-grid">
+
+          <button class="payment-btn" [class.active-payment]="selectedMode==='COD'" (click)="selectMode('COD')">
+
+            <div class="icon">🚚</div>
+
+            <div>
+
+              <h5>Cash On Delivery</h5>
+              <p>Pay after delivery</p>
+
+            </div>
+
+          </button>
+
+          <button class="payment-btn" [class.active-payment]="selectedMode==='UPI'" (click)="selectMode('UPI')">
+
+            <div class="icon">📱</div>
+
+            <div>
+
+              <h5>UPI Payment</h5>
+              <p>Fast & Secure</p>
+
+            </div>
+
+          </button>
+
+          <button class="payment-btn" [class.active-payment]="selectedMode==='Debit Card'"
+            (click)="selectMode('Debit Card')">
+
+            <div class="icon">💳</div>
+
+            <div>
+
+              <h5>Debit Card</h5>
+              <p>All banks supported</p>
+
+            </div>
+
+          </button>
+
+          <button class="payment-btn" [class.active-payment]="selectedMode==='Credit Card'"
+            (click)="selectMode('Credit Card')">
+
+            <div class="icon">💎</div>
+
+            <div>
+
+              <h5>Credit Card</h5>
+              <p>Secure Payment</p>
+
+            </div>
+
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- ADDRESS -->
+
+      <div *ngIf="userAddress?.address" class="premium-card">
+
+        <h3 class="section-title">
+          Delivery Address
+        </h3>
+
+        <div class="address-box">
+
+          <p><span>Name :</span> {{userAddress.name}}</p>
+
+          <p><span>Address :</span> {{userAddress.address}}</p>
+
+          <p><span>City :</span> {{userAddress.city}}</p>
+
+          <p><span>Pincode :</span> {{userAddress.pincode}}</p>
+
+        </div>
+
+      </div>
+
+      <!-- UPI -->
+
+      <div *ngIf="selectedMode==='UPI'" class="premium-card">
+
+        <h3 class="section-title">
+          Select UPI App
+        </h3>
+
+        <select class="premium-input" [(ngModel)]="selectedUpi" name="upi">
+
+          <option value="">Choose App</option>
+          <option>GPay</option>
+          <option>PhonePe</option>
+          <option>Paytm</option>
+
+        </select>
+
+      </div>
+
+      <!-- QR -->
+
+      <div *ngIf="selectedMode==='UPI' && selectedUpi" class="premium-card qr-section">
+
+        <img [src]="'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=DemoPayment-'+totalAmount"
+          class="qr-img">
+
+        <h4>
+          Scan & Pay
+        </h4>
+
+        <p>
+          Pay using {{selectedUpi}}
+        </p>
+
+      </div>
+
+      <!-- CARD -->
+
+      <div *ngIf="selectedMode==='Debit Card' || selectedMode==='Credit Card'" class="premium-card">
+
+        <h3 class="section-title">
+          Card Details
+        </h3>
+
+        <input class="premium-input" placeholder="Card Number" [(ngModel)]="card.number" name="cardNumber">
+
+        <input class="premium-input" placeholder="Card Holder Name" [(ngModel)]="card.name" name="cardName">
+
+        <div class="input-row">
+
+          <input class="premium-input" placeholder="MM/YY" [(ngModel)]="card.expiry" name="expiry">
+
+          <input class="premium-input" placeholder="CVV" [(ngModel)]="card.cvv" name="cvv">
+
+        </div>
+
+      </div>
+
+      <!-- WARNING -->
+
+      <div *ngIf="!userAddress?.address" class="warning-box">
+
+        <div class="warning-left">
+
+          <div class="warning-icon">
+            ⚠
+          </div>
+
+          <div>
+
+            <h4>
+              Address Missing
+            </h4>
+
+            <p>
+              Please add your address first
+            </p>
+
+          </div>
+
+        </div>
+
+        <button class="address-btn" (click)="goToProfile()">
+
+          Add Address
+
+        </button>
+
+      </div>
+
+      <!-- PAY -->
+
+      <button class="pay-btn" (click)="confirmPayment()" [disabled]="!userAddress?.address">
+
+        Pay ₹ {{totalAmount}}
+
+      </button>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="payment-right">
+
+      <div class="premium-card">
+
+        <div class="summary-top">
+
+          <h3>
+            Order Summary
+          </h3>
+
+          <span>
+            {{cartItems.length}} Items
+          </span>
+
+        </div>
+
+        <div class="product-card" *ngFor="let item of cartItems">
+
+          <img [src]="item.image" class="product-img">
+
+          <div class="product-info">
+
+            <h4>
+              {{item.name}}
+            </h4>
+
+            <p>
+              {{item.brand}}
+            </p>
+
+            <span>
+              Qty : {{item.quantity}}
+            </span>
+
+          </div>
+
+          <div class="product-price">
+
+            ₹ {{item.price * item.quantity}}
+
+          </div>
+
+        </div>
+
+        <div class="final-total">
+
+          <span>Total</span>
+
+          <h2>
+            ₹ {{totalAmount}}
+          </h2>
+
+        </div>
+
       </div>
 
     </div>

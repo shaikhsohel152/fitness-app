@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "myfolder:build:production"
+              "browserTarget": "GymGearPro:build:production"
             },
             "development": {
-              "browserTarget": "myfolder:build:development"
+              "browserTarget": "GymGearPro:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "myfolder:build"
+            "browserTarget": "GymGearPro:build"
           }
         },
         "test": {
