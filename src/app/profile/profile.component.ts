@@ -61,9 +61,7 @@ export class ProfileComponent implements OnInit {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
 
-    return password === confirmPassword
-      ? null
-      : { passwordMismatch: true };
+    return password === confirmPassword ? null : { passwordMismatch: true };
   }
 
   togglePassword() {
@@ -81,7 +79,6 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    // clean payload
     const { name, email, phone, password } = this.signupForm.value;
 
     const user: User = {
@@ -99,7 +96,6 @@ export class ProfileComponent implements OnInit {
 
         console.log("SIGNUP RESPONSE:", res);
 
-        // 🔥 FINAL SAFE FIX
         const createdUser = res.user || res.response;
 
         if (!createdUser) {
@@ -121,4 +117,4 @@ export class ProfileComponent implements OnInit {
 
     });
   }
-} 
+}
