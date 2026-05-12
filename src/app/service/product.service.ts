@@ -11,7 +11,7 @@ export interface Product {
   price: number;
   discountPercentage: number;
   rating: number;
-  bought: number;   // ✅ FIXED TYPO
+  bought: number;
   imgsrc: string;
   quantity: number;
 }
@@ -21,8 +21,8 @@ export interface Product {
 })
 export class ProductService {
 
-  // ✅ Backend URL
-  private url = 'https://angular-fitness-database.onrender.com/products';
+  // ================= FIXED BACKEND URL =================
+  private url = 'https://angular-fitness-database-1.onrender.com/products';
 
   constructor(private http: HttpClient) {}
 

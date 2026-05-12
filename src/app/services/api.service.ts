@@ -7,10 +7,10 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  // 🔥 IMPORTANT: MUST be your working Render backend
+  // ================= BASE URL =================
   private BASE_URL = "https://angular-fitness-database-1.onrender.com";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // ================= USERS =================
   getUsers(): Observable<any> {
@@ -23,6 +23,10 @@ export class ApiService {
 
   updateUser(id: string, data: any): Observable<any> {
     return this.http.put(`${this.BASE_URL}/users/${id}`, data);
+  }
+
+  deleteUser(id: string): Observable<any> {
+    return this.http.delete(`${this.BASE_URL}/users/${id}`);
   }
 
   // ================= PURCHASE =================
@@ -44,8 +48,14 @@ export class ApiService {
     return this.http.post(`${this.BASE_URL}/request`, data);
   }
 
+  // ================= PRODUCTS =================
+  getProducts(): Observable<any> {
+    return this.http.get(`${this.BASE_URL}/products`);
+  }
+
   // ================= LOGIN =================
   loginUser(data: any): Observable<any> {
     return this.http.post(`${this.BASE_URL}/api/login`, data);
   }
+
 }
