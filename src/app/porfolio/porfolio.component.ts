@@ -22,7 +22,7 @@ export class PorfolioComponent implements OnInit {
     private route: ActivatedRoute,
     private cart: CartService,
     private api: ApiService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
 
@@ -35,14 +35,13 @@ export class PorfolioComponent implements OnInit {
 
     this.user = JSON.parse(storedUser);
 
-    // Auto-fill inputs
+    // Auto-fill inputs safely
     this.addressInput = this.user.address || '';
     this.cityInput = this.user.city || '';
     this.pincodeInput = this.user.pincode || '';
-
   }
 
-
+  // ================= SAVE ADDRESS =================
   saveAddress(): void {
 
     if (!this.addressInput.trim() || !this.cityInput.trim() || !this.pincodeInput.trim()) {
@@ -50,18 +49,14 @@ export class PorfolioComponent implements OnInit {
       return;
     }
 
-    // Pincode validation
     const isIndianPincode = /^[1-9][0-9]{5}$/.test(this.pincodeInput);
 
     if (!isIndianPincode) {
-
       this.router.navigate(['/shipment-code'], {
         queryParams: { returnUrl: '/porfolio' }
       });
-
       return;
     }
-
 
     const updatedData = {
       address: this.addressInput,
@@ -69,15 +64,15 @@ export class PorfolioComponent implements OnInit {
       pincode: this.pincodeInput
     };
 
+    // 🔥 FIX: use _id instead of id
+    this.api.updateUser(this.user._id, updatedData).subscribe({
 
-    this.api.updateUser(this.user.id, updatedData).subscribe({
+      next: (res: any) => {
 
-      next: () => {
+        // update local user with response (safe way)
+        this.user = res.user || { ...this.user, ...updatedData };
 
-        this.user.address = this.addressInput;
-        this.user.city = this.cityInput;
-        this.user.pincode = this.pincodeInput;
-
+        // save to localStorage
         localStorage.setItem('currentUser', JSON.stringify(this.user));
 
         this.editAddress = false;
@@ -85,7 +80,8 @@ export class PorfolioComponent implements OnInit {
         alert('Details saved successfully');
       },
 
-      error: () => {
+      error: (err) => {
+        console.log("Update error:", err);
         alert('Failed to save details');
       }
 
@@ -93,6 +89,7 @@ export class PorfolioComponent implements OnInit {
 
   }
 
+  // ================= CANCEL EDIT =================
   cancelEdit(): void {
 
     this.addressInput = this.user.address || '';
@@ -100,22 +97,19 @@ export class PorfolioComponent implements OnInit {
     this.pincodeInput = this.user.pincode || '';
 
     this.editAddress = false;
-
   }
 
-
+  // ================= LOGOUT =================
   logout(): void {
 
     this.cart.clearCart();
     localStorage.removeItem('currentUser');
 
     this.router.navigate(['/profile']);
-
   }
-  goToOrders() {
 
+  // ================= ORDERS =================
+  goToOrders(): void {
     this.router.navigate(['/myorder']);
-
   }
-
 }

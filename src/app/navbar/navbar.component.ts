@@ -12,7 +12,6 @@ import { filter } from 'rxjs/operators';
 export class NavbarComponent implements OnInit {
 
   cartCount = 0;
-
   isLoggedIn = false;
   userName: string | null = null;
 
@@ -27,13 +26,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // ✅ ONLY ng serve restart par user clear hoga
-    if (!sessionStorage.getItem('ngServeStarted')) {
-      localStorage.removeItem('currentUser');
-      sessionStorage.setItem('ngServeStarted', 'true');
-    }
+    // ❌ REMOVE THIS (causes logout bug)
+    // sessionStorage logic hata do
 
-    // 🛒 Cart Count
+    // 🛒 Cart count
     this.cartService.cart$.subscribe(cart => {
       this.cartCount = cart.reduce(
         (count, item) => count + item.quantity,
@@ -41,10 +37,8 @@ export class NavbarComponent implements OnInit {
       );
     });
 
-    // 🔐 Initial load
     this.loadUser();
 
-    // 🔁 Route change par navbar update
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -52,14 +46,19 @@ export class NavbarComponent implements OnInit {
       });
   }
 
-  // 👤 Load user from localStorage
+  // 👤 Load user safely
   loadUser(): void {
+
     const user = localStorage.getItem('currentUser');
 
     if (user) {
       const parsedUser = JSON.parse(user);
+
       this.isLoggedIn = true;
-      this.userName = parsedUser.name || parsedUser.username;
+
+      // ✅ ONLY name (no fallback confusion)
+      this.userName = parsedUser.name;
+
     } else {
       this.isLoggedIn = false;
       this.userName = null;
@@ -72,14 +71,12 @@ export class NavbarComponent implements OnInit {
       : this.router.navigate(['/profile']);
   }
 
-  // 🚪 Logout
   logout(): void {
     localStorage.removeItem('currentUser');
     this.loadUser();
     this.router.navigate(['/home']);
   }
 
-  // 🔍 Search
   openSearch(): void {
     this.showSearch = true;
   }

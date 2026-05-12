@@ -12,7 +12,7 @@ export class ProductComponent implements OnInit {
   products: any[] = [];
   filteredProducts: any[] = [];
 
-  searchTextValue = '';
+  searchTextValue: string = '';
 
   constructor(
     private productService: ProductService,
@@ -21,53 +21,54 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // ================= LOAD PRODUCTS =================
     this.productService.getProducts().subscribe({
-      next: (data:any) => {
+      next: (data: any) => {
 
-        console.log("MongoDB Products:", data);
+        console.log("MongoDB Products Response:", data);
 
-        // ✅ FIX → nested products array
-        this.products = data[0]?.products || [];
+        // ✅ FIX: API already returns array directly
+        this.products = data || [];
 
-        this.filteredProducts = this.products;
+        // initial display
+        this.filteredProducts = [...this.products];
 
       },
 
       error: (err) => {
-        console.log("Error loading products", err);
+        console.log("Error loading products:", err);
       }
     });
 
 
-    this.searchService.searchText.subscribe(text => {
+    // ================= SEARCH SUBSCRIPTION =================
+    this.searchService.searchText.subscribe((text: string) => {
 
       this.searchTextValue = text.toLowerCase().trim();
-
       this.applyFilter();
 
     });
 
   }
 
-
-  applyFilter() {
+  // ================= FILTER LOGIC =================
+  applyFilter(): void {
 
     if (!this.searchTextValue) {
-      this.filteredProducts = this.products;
+      this.filteredProducts = [...this.products];
       return;
     }
 
-    this.filteredProducts = this.products.filter(product =>
+    this.filteredProducts = this.products.filter(product => {
 
-      product?.brand?.toLowerCase().includes(this.searchTextValue) ||
+      return (
+        product?.brand?.toLowerCase().includes(this.searchTextValue) ||
+        product?.category?.toLowerCase().includes(this.searchTextValue) ||
+        product?.description?.toLowerCase().includes(this.searchTextValue) ||
+        product?.price?.toString().includes(this.searchTextValue)
+      );
 
-      product?.category?.toLowerCase().includes(this.searchTextValue) ||
-
-      product?.description?.toLowerCase().includes(this.searchTextValue) ||
-
-      product?.price?.toString().includes(this.searchTextValue)
-
-    );
+    });
 
   }
 

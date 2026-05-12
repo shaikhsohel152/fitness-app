@@ -39,36 +39,47 @@ export class LoginComponent implements OnInit {
 
   handleLogin(): void {
 
-  if (this.loginForm.invalid) {
-    this.loginForm.markAllAsTouched();
-    return;
-  }
-
-  this.api.loginUser(this.loginForm.value)
-  .subscribe({
-
-    next:(user:any)=>{
-
-      // cart clear
-      this.cartService.clearCart();
-
-      // save user
-      localStorage.setItem(
-        'currentUser',
-        JSON.stringify(user)
-      );
-
-      this.router.navigate(['/welcome1']);
-
-    },
-
-    error:()=>{
-
-      this.router.navigate(['/signin-reject']);
-
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
     }
 
-  });
+    console.log("LOGIN REQUEST:", this.loginForm.value);
 
-}
+    this.api.loginUser(this.loginForm.value)
+      .subscribe({
+
+        next: (res: any) => {
+
+          console.log("LOGIN RESPONSE:", res);
+
+          // 🧠 SAFE USER EXTRACTION (handles all backend formats)
+          const user = res.user || res.response || res;
+
+          if (!user || !user.email) {
+            this.router.navigate(['/signin-reject']);
+            return;
+          }
+
+          // 🧹 clear cart
+          this.cartService.clearCart();
+
+          // 💾 save user
+          localStorage.setItem(
+            'currentUser',
+            JSON.stringify(user)
+          );
+
+          // 🚀 redirect
+          this.router.navigate(['/welcome1']);
+        },
+
+        error: (err) => {
+          console.log("LOGIN ERROR:", err);
+          this.router.navigate(['/signin-reject']);
+        }
+
+      });
+
+  }
 }

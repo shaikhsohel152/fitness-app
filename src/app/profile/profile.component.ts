@@ -3,8 +3,7 @@ import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 
-
-interface User {   
+interface User {
   _id?: string;
   name: string;
   email: string;
@@ -23,7 +22,7 @@ export class ProfileComponent implements OnInit {
   showPassword = false;
   showConfirmPassword = false;
 
-  constructor(private router: Router, private api: ApiService) { }
+  constructor(private router: Router, private api: ApiService) {}
 
   ngOnInit(): void {
 
@@ -56,21 +55,16 @@ export class ProfileComponent implements OnInit {
       },
       { validators: this.passwordMatchValidator }
     );
-
   }
 
-
   passwordMatchValidator(control: AbstractControl) {
-
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
 
     return password === confirmPassword
       ? null
       : { passwordMismatch: true };
-
   }
-
 
   togglePassword() {
     this.showPassword = !this.showPassword;
@@ -80,7 +74,6 @@ export class ProfileComponent implements OnInit {
     this.showConfirmPassword = !this.showConfirmPassword;
   }
 
-
   onSignup(): void {
 
     if (this.signupForm.invalid) {
@@ -88,32 +81,44 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
+    // clean payload
+    const { name, email, phone, password } = this.signupForm.value;
+
     const user: User = {
-      name: this.signupForm.value.name.trim(),
-      email: this.signupForm.value.email.toLowerCase(),
-      phone: this.signupForm.value.phone,
-      password: this.signupForm.value.password
+      name: name.trim(),
+      email: email.toLowerCase(),
+      phone,
+      password
     };
+
+    console.log("SIGNUP REQUEST:", user);
 
     this.api.addUser(user).subscribe({
 
-      next: (res:any) => {
+      next: (res: any) => {
 
-        // MongoDB response save karega
-        localStorage.setItem('currentUser', JSON.stringify(res.response));
+        console.log("SIGNUP RESPONSE:", res);
+
+        // 🔥 FINAL SAFE FIX
+        const createdUser = res.user || res.response;
+
+        if (!createdUser) {
+          alert(res.message || 'Signup failed!');
+          return;
+        }
+
+        localStorage.setItem('currentUser', JSON.stringify(createdUser));
 
         this.signupForm.reset();
 
         this.router.navigate(['/welcome2']);
-
       },
 
-      error: () => {
-        alert('Signup failed. Try again!');
+      error: (err) => {
+        console.log("SIGNUP ERROR:", err);
+        alert(err.error?.message || 'Signup failed!');
       }
 
     });
-
   }
-
-}
+} 

@@ -8,12 +8,12 @@ export interface Product {
   brand: string;
   description: string;
   category: string;
-  price: string;
-  discountPercentage: string;
-  rating: string;
-  bougth: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  bought: number;   // ✅ FIXED TYPO
   imgsrc: string;
-  quantity:number;
+  quantity: number;
 }
 
 @Injectable({
@@ -21,19 +21,18 @@ export interface Product {
 })
 export class ProductService {
 
-  // ✅ Node + MongoDB Backend URL
-private url = 'https://angular-fitness-database.onrender.com/products';
+  // ✅ Backend URL
+  private url = 'https://angular-fitness-database.onrender.com/products';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  // ✅ Get all products
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.url);
+  // ================= GET ALL PRODUCTS =================
+  getProducts(): Observable<any> {
+    return this.http.get<any>(this.url);
   }
 
-  // ✅ Get single product (Detail Page)
-  getProductById(id: string): Observable<Product> {
-    return this.http.get<Product>(`${this.url}/${id}`);
+  // ================= GET SINGLE PRODUCT =================
+  getProductById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.url}/${id}`);
   }
-
 }
