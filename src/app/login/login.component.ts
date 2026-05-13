@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+import {
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+
 import { Router } from '@angular/router';
+
 import { ApiService } from '../services/api.service';
+
 import { CartService } from '../service/cart.service';
 
 @Component({
@@ -9,32 +17,41 @@ import { CartService } from '../service/cart.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
+
   showPassword = false;
 
   constructor(
     private api: ApiService,
     private router: Router,
     private cartService: CartService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+
     this.loginForm = new FormGroup({
+
       email: new FormControl('', [
         Validators.required,
         Validators.email
       ]),
+
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(8)
       ])
+
     });
+
   }
 
   togglePassword(): void {
+
     this.showPassword = !this.showPassword;
+
   }
 
   handleLogin(): void {
@@ -52,19 +69,25 @@ export class LoginComponent implements OnInit {
 
         console.log("LOGIN RESPONSE:", res);
 
-        // 🔥 SAFE EXTRACTION (backend flexible)
-        const user = res.user || res.response;
+        const user = res.user;
 
         if (!user || !user.email) {
           this.router.navigate(['/signin-reject']);
           return;
         }
 
+        // clear cart
         this.cartService.clearCart();
 
+        // save user globally
         localStorage.setItem('currentUser', JSON.stringify(user));
 
-        this.router.navigate(['/welcome1']);
+        // 🔥 FIX: redirect to welcome1
+        this.router.navigate(['/welcome1'], {
+          state: {
+            name: user.name
+          }
+        });
       },
 
       error: (err) => {

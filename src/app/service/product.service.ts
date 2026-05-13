@@ -22,7 +22,7 @@ export interface Product {
 export class ProductService {
 
   // ================= FIXED BACKEND URL =================
-  private url = 'https://angular-fitness-database-1.onrender.com/products';
+  private url = 'http://localhost:5000/products';
 
   constructor(private http: HttpClient) {}
 

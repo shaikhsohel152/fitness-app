@@ -28,7 +28,7 @@ export class ProductComponent implements OnInit {
         console.log("MongoDB Products Response:", data);
 
         // ✅ FIX: API already returns array directly
-        this.products = data || [];
+        this.products = data.products[0].products || [];
 
         // initial display
         this.filteredProducts = [...this.products];

@@ -13,12 +13,13 @@ export class Welcome1Component implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-   
-    this.userName = history.state?.name || '';
+
+    const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+
+    this.userName = user?.name || '';
   }
 
   closePage(): void {
-    
     this.router.navigate(['/porfolio']);
   }
 }

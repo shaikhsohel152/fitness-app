@@ -44,51 +44,58 @@ export class PorfolioComponent implements OnInit {
   // ================= SAVE ADDRESS =================
   saveAddress(): void {
 
-    if (!this.addressInput.trim() || !this.cityInput.trim() || !this.pincodeInput.trim()) {
-      alert('All fields are mandatory');
-      return;
-    }
-
-    const isIndianPincode = /^[1-9][0-9]{5}$/.test(this.pincodeInput);
-
-    if (!isIndianPincode) {
-      this.router.navigate(['/shipment-code'], {
-        queryParams: { returnUrl: '/porfolio' }
-      });
-      return;
-    }
-
-    const updatedData = {
-      address: this.addressInput,
-      city: this.cityInput,
-      pincode: this.pincodeInput
-    };
-
-    // 🔥 FIX: use _id instead of id
-    this.api.updateUser(this.user._id, updatedData).subscribe({
-
-      next: (res: any) => {
-
-        // update local user with response (safe way)
-        this.user = res.user || { ...this.user, ...updatedData };
-
-        // save to localStorage
-        localStorage.setItem('currentUser', JSON.stringify(this.user));
-
-        this.editAddress = false;
-
-        alert('Details saved successfully');
-      },
-
-      error: (err) => {
-        console.log("Update error:", err);
-        alert('Failed to save details');
-      }
-
-    });
-
+  if (
+    !this.addressInput.trim() ||
+    !this.cityInput.trim() ||
+    !this.pincodeInput.trim()
+  ) {
+    alert('All fields are mandatory');
+    return;
   }
 
+  const isIndianPincode = /^[1-9][0-9]{5}$/.test(this.pincodeInput);
+
+  if (!isIndianPincode) {
+    this.router.navigate(['/shipment-code'], {
+      queryParams: { returnUrl: '/porfolio' }
+    });
+    return;
+  }
+
+  const updatedData = {
+    address: this.addressInput,
+    city: this.cityInput,
+    pincode: this.pincodeInput
+  };
+
+  console.log("SENDING TO BACKEND:", updatedData);
+
+  this.api.updateUser(this.user._id, updatedData).subscribe({
+
+    next: (res: any) => {
+
+      console.log("BACKEND RESPONSE:", res);
+
+      // 🔥 ALWAYS FORCE UPDATE (safe fix)
+      this.user = {
+        ...this.user,
+        ...updatedData
+      };
+
+      localStorage.setItem('currentUser', JSON.stringify(this.user));
+
+      this.editAddress = false;
+
+      alert('Details saved successfully');
+    },
+
+    error: (err) => {
+      console.log("Update error:", err);
+      alert('Failed to save details');
+    }
+
+  });
+}
   // ================= CANCEL EDIT =================
   cancelEdit(): void {
 

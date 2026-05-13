@@ -1,91 +1,124 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  AbstractControl
+} from '@angular/forms';
+
 import { Router } from '@angular/router';
+
 import { ApiService } from '../services/api.service';
 
-interface User {
-  _id?: string;
-  name: string;
-  email: string;
-  phone: string;
-  password: string;
-}
-
 @Component({
-  selector: 'app-profile',
+  selector: 'app-signup',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
+
 export class ProfileComponent implements OnInit {
 
   signupForm!: FormGroup;
+
   showPassword = false;
+
   showConfirmPassword = false;
 
-  constructor(private router: Router, private api: ApiService) {}
+  constructor(
+    private router: Router,
+    private api: ApiService
+  ) { }
 
   ngOnInit(): void {
 
-    this.signupForm = new FormGroup(
+    this.signupForm = new FormGroup({
+
+      name: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[a-zA-Z ]*$')
+      ]),
+
+      email: new FormControl('', [
+        Validators.required,
+        Validators.email
+      ]),
+
+      phone: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[0-9]{10}$')
+      ]),
+
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8)
+      ]),
+
+      confirmPassword: new FormControl('', [
+        Validators.required
+      ])
+
+    },
       {
-        name: new FormControl('', [
-          Validators.required,
-          Validators.pattern('^[a-zA-Z ]*$')
-        ]),
+        validators: this.passwordMatchValidator
+      });
 
-        email: new FormControl('', [
-          Validators.required,
-          Validators.email
-        ]),
-
-        phone: new FormControl('', [
-          Validators.required,
-          Validators.pattern('^[0-9]{10}$')
-        ]),
-
-        password: new FormControl('', [
-          Validators.required,
-          Validators.minLength(8)
-        ]),
-
-        confirmPassword: new FormControl('', [
-          Validators.required,
-          Validators.minLength(8)
-        ])
-      },
-      { validators: this.passwordMatchValidator }
-    );
   }
 
-  passwordMatchValidator(control: AbstractControl) {
-    const password = control.get('password')?.value;
-    const confirmPassword = control.get('confirmPassword')?.value;
+  passwordMatchValidator(
+    control: AbstractControl
+  ) {
 
-    return password === confirmPassword ? null : { passwordMismatch: true };
+    const password =
+      control.get('password')?.value;
+
+    const confirmPassword =
+      control.get('confirmPassword')?.value;
+
+    return password === confirmPassword
+      ? null
+      : { passwordMismatch: true };
+
   }
 
-  togglePassword() {
+  togglePassword(): void {
+
     this.showPassword = !this.showPassword;
+
   }
 
-  toggleConfirmPassword() {
-    this.showConfirmPassword = !this.showConfirmPassword;
+  toggleConfirmPassword(): void {
+
+    this.showConfirmPassword =
+      !this.showConfirmPassword;
+
   }
 
   onSignup(): void {
 
     if (this.signupForm.invalid) {
+
       this.signupForm.markAllAsTouched();
+
       return;
+
     }
 
-    const { name, email, phone, password } = this.signupForm.value;
+    const user = {
 
-    const user: User = {
-      name: name.trim(),
-      email: email.toLowerCase(),
-      phone,
-      password
+      name: this.signupForm.value.name.trim(),
+
+      email: this.signupForm.value.email
+        .trim()
+        .toLowerCase(),
+
+      phone: this.signupForm.value.phone,
+
+      password: this.signupForm.value.password
+
     };
 
     console.log("SIGNUP REQUEST:", user);
@@ -96,25 +129,39 @@ export class ProfileComponent implements OnInit {
 
         console.log("SIGNUP RESPONSE:", res);
 
-        const createdUser = res.user || res.response;
+        if (!res.user) {
 
-        if (!createdUser) {
-          alert(res.message || 'Signup failed!');
+          alert("Signup Failed");
+
           return;
+
         }
 
-        localStorage.setItem('currentUser', JSON.stringify(createdUser));
+        localStorage.setItem(
+          'currentUser',
+          JSON.stringify(res.user)
+        );
 
         this.signupForm.reset();
 
+        // ✅ LOGIN PAGE
         this.router.navigate(['/welcome2']);
+
       },
 
       error: (err) => {
+
         console.log("SIGNUP ERROR:", err);
-        alert(err.error?.message || 'Signup failed!');
+
+        alert(
+          err.error?.message ||
+          "Signup Failed"
+        );
+
       }
 
     });
+
   }
+
 }

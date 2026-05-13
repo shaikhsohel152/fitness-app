@@ -10,8 +10,8 @@ import { CartService } from '../service/cart.service';
 })
 export class DetailproductComponent implements OnInit {
 
-  product: any;
-  loading: boolean = true; // ✅ loading state
+  product: any = null;
+  loading: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,45 +21,42 @@ export class DetailproductComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // ✅ Get ID from route
     const id = this.route.snapshot.paramMap.get('id');
     console.log("Route ID:", id);
 
+    this.loading = true;
+
     this.productService.getProducts().subscribe({
       next: (data: any) => {
+
         console.log("Mongo Data:", data);
 
-        // Flatten all products (nested categories or direct products)
-        const productsArray: any[] = [];
-        if (Array.isArray(data)) {
-          data.forEach(item => {
-            if (Array.isArray(item.products)) {
-              productsArray.push(...item.products);
-            } else if (item.id) {
-              productsArray.push(item);
-            }
-          });
-        }
+        // 🔥 FIX: correct flattening (ONLY use actual array)
+        const productsArray = Array.isArray(data)
+          ? data
+          : (data.products?.[0]?.products || []);
 
-        // ✅ Find product by id
-        this.product = productsArray.find(p => String(p.id) === String(id));
+        console.log("All Products:", productsArray);
+
+        this.product = productsArray.find(
+          (p: any) => String(p.id) === String(id)
+        );
 
         console.log("Selected Product:", this.product);
 
-        this.loading = false; // ✅ stop loading
+        this.loading = false;
+
       },
+
       error: (err) => {
-        console.error(err);
+        console.log(err);
         this.loading = false;
       }
     });
   }
 
   addToCart() {
-
-if (!this.product) return;
-
-this.cartService.addToCart(this.product);
-
-}
+    if (!this.product) return;
+    this.cartService.addToCart(this.product);
+  }
 }
