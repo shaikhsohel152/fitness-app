@@ -1,3 +1,4 @@
+
 <!-- HERO SECTION -->
 <section class="hero-section d-flex align-items-center justify-content-center text-center">
   <div class="brand-box d-flex align-items-center justify-content-center">
@@ -10,7 +11,7 @@
 <section class="features-section py-5">
   <div class="container">
 
-    <h2 class="section-title text-center mb-5">
+    <h2 class="section-title">
       Why Choose <span>GYMGEARPRO</span>
     </h2>
 
@@ -27,6 +28,7 @@
             <h4>{{ item.title }}</h4>
             <p>{{ item.desc }}</p>
           </div>
+
         </div>
 
       </div>
@@ -65,35 +67,57 @@
           <form [formGroup]="joinForm" (ngSubmit)="OnJoingym()">
 
             <!-- NAME -->
-            <input
-            type="text"
-            class="form-control mb-2"
-            placeholder="Full Name"
-            formControlName="fullName"
-            >
+            <input type="text"
+                   class="form-control mb-1"
+                   placeholder="Full Name"
+                   formControlName="fullName">
+
+            <small class="error"
+              *ngIf="joinForm.get('fullName')?.touched && joinForm.get('fullName')?.invalid">
+
+              <span *ngIf="joinForm.get('fullName')?.errors?.['required']">
+                Full name is required
+              </span>
+
+            </small>
 
             <!-- EMAIL -->
-            <input
-            type="email"
-            class="form-control mb-2"
-            placeholder="Email Address"
-            formControlName="email"
-            >
+            <input type="email"
+                   class="form-control mb-1"
+                   placeholder="Email Address"
+                   formControlName="email">
+
+            <small class="error"
+              *ngIf="joinForm.get('email')?.touched && joinForm.get('email')?.invalid">
+
+              <span *ngIf="joinForm.get('email')?.errors?.['required']">
+                Email is required
+              </span>
+
+              <span *ngIf="joinForm.get('email')?.errors?.['email']">
+                Enter valid email
+              </span>
+
+            </small>
 
             <!-- PHONE -->
-            <input
-            type="text"
-            class="form-control mb-2"
-            placeholder="Phone Number"
-            formControlName="phone"
-            maxlength="10"
-            >
+            <input type="text"
+                   class="form-control mb-1"
+                   placeholder="Phone Number"
+                   formControlName="phone"
+                   maxlength="10">
+
+            <small class="error"
+              *ngIf="joinForm.get('phone')?.touched && joinForm.get('phone')?.invalid">
+
+              <span *ngIf="joinForm.get('phone')?.errors?.['required']">
+                Phone number is required
+              </span>
+
+            </small>
 
             <!-- TRAINING -->
-            <select
-            class="form-control mb-3"
-            formControlName="training"
-            >
+            <select class="form-control mb-2" formControlName="training">
 
               <option value="" disabled selected>
                 Personal Training?
@@ -104,12 +128,15 @@
 
             </select>
 
+            <small class="error"
+              *ngIf="joinForm.get('training')?.touched && joinForm.get('training')?.invalid">
+              Please select training option
+            </small>
+
             <!-- BUTTON -->
-            <button
-            type="submit"
-            class="join-btn w-100"
-            [disabled]="joinForm.invalid"
-            >
+            <button type="submit"
+                    class="join-btn w-100"
+                    [disabled]="joinForm.invalid">
               Become a Member
             </button>
 
@@ -122,19 +149,18 @@
     </div>
   </div>
 </section>
-<!-- Footer  -->
-<footer class="short-footer bg-dark text-light mt-5 py-3">
+
+<!-- FOOTER -->
+<footer class="short-footer text-light py-3">
   <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
 
     <div class="mb-2 mb-md-0">
-      <strong><i class="fas fa-dumbbell me-2 text-warning"></i>GymGear Pro</strong> &copy; 2026. All rights reserved.
+      <strong>
+        <i class="fas fa-dumbbell me-2 text-warning"></i>
+        GymGear Pro
+      </strong>
+      &copy; 2026. All rights reserved.
     </div>
-
-    <!-- <div class="d-flex gap-3">
-      <a href="#" class="footer-icon"><i class="fab fa-facebook-f"></i></a>
-      <a href="#" class="footer-icon"><i class="fab fa-instagram"></i></a>
-      <a href="#" class="footer-icon"><i class="fab fa-twitter"></i></a>
-    </div> -->
 
   </div>
 </footer>

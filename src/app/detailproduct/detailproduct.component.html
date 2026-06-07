@@ -1,17 +1,5 @@
 <!-- DETAIL PRODUCT PAGE WRAPPER -->
-<div class="detail-product-page m-3">
-
-  <!-- BREADCRUMB -->
-  <nav aria-label="breadcrumb" class="breadcrumb-nav p-3 rounded shadow-sm mb-5">
-    <ol class="breadcrumb mb-0">
-      <li class="breadcrumb-item">
-        <a routerLink="/home" class="text-decoration-none">Home</a>
-      </li>
-      <li class="breadcrumb-item active">
-        {{ product?.brand || 'Product' }}
-      </li>
-    </ol>
-  </nav>
+<div class="detail-product-page">
 
   <!-- PRODUCT DETAILS -->
   <div class="container" *ngIf="product; else loading">
@@ -38,17 +26,18 @@
           ₹ {{ product?.price }}
         </h3>
 
-        <p>
-          Category: <b>{{ product?.category }}</b>
-        </p>
+        <div class="product-meta">
 
-        <p>
-          Rating ⭐ : {{ product?.rating }}
-        </p>
+          <p>
+            Category: <b>{{ product?.category }}</b>
+          </p>
 
-        <button class="btn-add-cart w-100 mt-4"
-                (click)="addToCart()"
-                routerLink="/cart">
+          <p>
+            Rating ⭐ : <b>{{ product?.rating }}</b>
+          </p>
+
+        </div>
+        <button class="btn-add-cart w-100 mt-4" (click)="addToCart()" routerLink="/cart">
           Add To Cart
         </button>
 

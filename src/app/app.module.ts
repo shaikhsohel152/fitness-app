@@ -13,7 +13,7 @@ import { DetailproductComponent } from './detailproduct/detailproduct.component'
 import { ProductComponent } from './product/product.component';
 import { CardioComponent } from './cardio/cardio.component';
 import { CartComponent } from './cart/cart.component';
-import { ProfileComponent } from './profile/profile.component';
+
 
 import { GymComponent } from './gym/gym.component';
 import { LoginComponent } from './login/login.component';
@@ -30,17 +30,13 @@ import { Welcome3Component } from './welcome3/welcome3.component';
 import { Welcome4Component } from './welcome4/welcome4.component';
 import { RejectPageComponent } from './reject-page/reject-page.component';
 import { SigninRejectComponent } from './signin-reject/signin-reject.component';
-import { PorfolioComponent } from './porfolio/porfolio.component';
+
 import { FormsModule } from '@angular/forms';
 import { WithoutLoginComponent } from './without-login/without-login.component';
 import { ShipmentCodeComponent } from './shipment-code/shipment-code.component';
 import { PaymentModeComponent } from './payment-mode/payment-mode.component';
 import { MyorderComponent } from './myorder/myorder.component';
-
-
-
-
-
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +50,7 @@ import { MyorderComponent } from './myorder/myorder.component';
     ProductComponent,
     CardioComponent,
     CartComponent,
-    ProfileComponent,
+   
     
     GymComponent,
     LoginComponent,
@@ -65,11 +61,12 @@ import { MyorderComponent } from './myorder/myorder.component';
     Welcome4Component,
     RejectPageComponent,
     SigninRejectComponent,
-    PorfolioComponent,
+   
     WithoutLoginComponent,
     ShipmentCodeComponent,
     PaymentModeComponent,
-    MyorderComponent
+    MyorderComponent,
+    ProfileComponent
     
     
     

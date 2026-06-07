@@ -22,7 +22,7 @@ export interface Product {
 export class ProductService {
 
   // ================= FIXED BACKEND URL =================
-  private url = 'http://localhost:5000/products';
+ private url = 'http://localhost:3500/products';
 
   constructor(private http: HttpClient) {}
 

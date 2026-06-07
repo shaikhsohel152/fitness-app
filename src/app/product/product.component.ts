@@ -12,7 +12,7 @@ export class ProductComponent implements OnInit {
   products: any[] = [];
   filteredProducts: any[] = [];
 
-  searchTextValue: string = '';
+  searchTextValue = '';
 
   constructor(
     private productService: ProductService,
@@ -21,42 +21,52 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // ================= LOAD PRODUCTS =================
-    this.productService.getProducts().subscribe({
-      next: (data: any) => {
+    this.loadProducts();
 
-        console.log("MongoDB Products Response:", data);
-
-        // ✅ FIX: API already returns array directly
-        this.products = data.products[0].products || [];
-
-        // initial display
-        this.filteredProducts = [...this.products];
-
-      },
-
-      error: (err) => {
-        console.log("Error loading products:", err);
-      }
-    });
-
-
-    // ================= SEARCH SUBSCRIPTION =================
     this.searchService.searchText.subscribe((text: string) => {
 
-      this.searchTextValue = text.toLowerCase().trim();
+      this.searchTextValue = text
+        ? text.toLowerCase().trim()
+        : '';
+
       this.applyFilter();
 
     });
 
   }
 
-  // ================= FILTER LOGIC =================
+loadProducts(): void {
+
+  this.productService.getProducts().subscribe({
+
+    next: (data: any) => {
+
+      console.log(data);
+
+      // FINAL FIX
+      this.products = data?.products?.[0]?.products || [];
+
+      this.filteredProducts = [...this.products];
+
+      console.log('Products Length:', this.products.length);
+
+    },
+
+    error: (err) => {
+      console.log(err);
+    }
+
+  });
+
+}
+
   applyFilter(): void {
 
     if (!this.searchTextValue) {
+
       this.filteredProducts = [...this.products];
       return;
+
     }
 
     this.filteredProducts = this.products.filter(product => {

@@ -1,111 +1,87 @@
-<div
-  class="container-fluid min-vh-100 d-flex align-items-center justify-content-center px-3"
-  style="padding-top: 56px;"
->
+<div class="login-page">
 
-  <div class="row w-100 justify-content-center">
+  <!-- LEFT SIDE -->
+  <div class="login-banner">
 
-    <div class="col-12 col-sm-10 col-md-6 col-lg-5 col-xl-4">
+    <div class="overlay">
 
-      <div class="card bg-dark text-light shadow-lg rounded-4">
+      <h1>GYMGEARPRO</h1>
 
-        <div class="card-body p-4 p-sm-5">
+      <p>
+        Train Hard.
+        Stay Strong.
+        Transform Yourself.
+      </p>
 
-          <h2 class="text-center fw-bold text-warning mb-4">
-            Sign In To GymGearPro 💪
-          </h2>
+    </div>
 
-          <form
-            [formGroup]="loginForm"
-            (ngSubmit)="handleLogin()"
-            class="d-flex flex-column gap-3"
-          >
+  </div>
 
-            <!-- EMAIL -->
-            <div>
+  <!-- RIGHT SIDE -->
+  <div class="login-form-area">
 
-              <label class="form-label">
-                Email
-              </label>
+    <div class="login-card">
 
-              <input
-                type="email"
-                class="form-control form-control-lg"
-                placeholder="Enter your email"
-                formControlName="email"
-              />
+      <div class="header">
+        <h2>Welcome Back</h2>
+        <p>Access your fitness dashboard</p>
+      </div>
 
-              <small
-                class="text-danger"
-                *ngIf="loginForm.get('email')?.touched &&
-                       loginForm.get('email')?.invalid"
-              >
-                Enter valid email
-              </small>
+      <!-- STEP 1 -->
+      <div *ngIf="step === 1" class="form">
 
-            </div>
+        <input
+          type="email"
+          placeholder="Email Address"
+          [(ngModel)]="email"
+        />
 
-            <!-- PASSWORD -->
-            <div class="password-wrapper">
+        <button
+          class="primary-btn"
+          (click)="sendOtp()"
+          [disabled]="loading">
 
-              <label class="form-label">
-                Password
-              </label>
+          {{ loading ? 'Sending OTP...' : 'Send OTP' }}
 
-              <div class="input-eye-wrapper">
+        </button>
 
-                <input
-                  [type]="showPassword ? 'text' : 'password'"
-                  class="form-control form-control-lg pe-5"
-                  placeholder="Enter password"
-                  formControlName="password"
-                />
+      </div>
 
-                <span
-                  class="eye-icon"
-                  (click)="togglePassword()"
-                >
-                  {{ showPassword ? '🙈' : '👁️' }}
-                </span>
+      <!-- STEP 2 -->
+      <div *ngIf="step === 2" class="form">
 
-              </div>
+        <p class="otp-text">
+          OTP sent to <b>{{ email }}</b>
+        </p>
 
-              <small
-                class="text-danger"
-                *ngIf="loginForm.get('password')?.touched &&
-                       loginForm.get('password')?.invalid"
-              >
-                Password must be at least 8 characters
-              </small>
+        <input
+          type="text"
+          placeholder="Enter OTP"
+          [(ngModel)]="otp"
+        />
 
-            </div>
+        <input
+          type="text"
+          placeholder="Full Name"
+          [(ngModel)]="name"
+        />
 
-            <!-- REGISTER -->
-            <p class="text-center">
+        <button
+          class="primary-btn"
+          (click)="verifyOtp()"
+          [disabled]="loading">
 
-              New User?
+          {{ loading ? 'Verifying...' : 'Verify & Login' }}
 
-              <a
-                routerLink="/register"
-                class="text-warning fw-bold"
-              >
-                Registration
-              </a>
+        </button>
 
-            </p>
+        <button
+          class="link-btn"
+          (click)="resendOtp()">
 
-            <!-- BUTTON -->
-            <button
-              type="submit"
-              class="btn btn-warning fw-bold py-2"
-              [disabled]="loginForm.invalid"
-            >
-              Login
-            </button>
+          Resend OTP
 
-          </form>
-
-        </div>
+        </button>
 
       </div>
 

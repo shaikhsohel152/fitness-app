@@ -1,167 +1,157 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-  AbstractControl
-} from '@angular/forms';
-
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { CartService } from '../service/cart.service';
 import { ApiService } from '../services/api.service';
 
+interface Address {
+  phone: string;
+  address: string;
+  city: string;
+  pincode: string;
+}
+
 @Component({
-  selector: 'app-signup',
+  selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-
 export class ProfileComponent implements OnInit {
 
-  signupForm!: FormGroup;
+  user: any = null;
 
-  showPassword = false;
+  tab: string = 'profile';
 
-  showConfirmPassword = false;
+  addressInput: Address = {
+    phone: '',
+    address: '',
+    city: '',
+    pincode: ''
+  };
 
   constructor(
     private router: Router,
+    private cart: CartService,
     private api: ApiService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-
-    this.signupForm = new FormGroup({
-
-      name: new FormControl('', [
-        Validators.required,
-        Validators.pattern('^[a-zA-Z ]*$')
-      ]),
-
-      email: new FormControl('', [
-        Validators.required,
-        Validators.email
-      ]),
-
-      phone: new FormControl('', [
-        Validators.required,
-        Validators.pattern('^[0-9]{10}$')
-      ]),
-
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(8)
-      ]),
-
-      confirmPassword: new FormControl('', [
-        Validators.required
-      ])
-
-    },
-      {
-        validators: this.passwordMatchValidator
-      });
-
+    this.loadUser();
   }
 
-  passwordMatchValidator(
-    control: AbstractControl
-  ) {
+  // ================= LOAD USER =================
+  loadUser(): void {
 
-    const password =
-      control.get('password')?.value;
+    const data = localStorage.getItem('currentUser');
 
-    const confirmPassword =
-      control.get('confirmPassword')?.value;
-
-    return password === confirmPassword
-      ? null
-      : { passwordMismatch: true };
-
-  }
-
-  togglePassword(): void {
-
-    this.showPassword = !this.showPassword;
-
-  }
-
-  toggleConfirmPassword(): void {
-
-    this.showConfirmPassword =
-      !this.showConfirmPassword;
-
-  }
-
-  onSignup(): void {
-
-    if (this.signupForm.invalid) {
-
-      this.signupForm.markAllAsTouched();
-
+    if (!data) {
+      this.router.navigate(['/login']);
       return;
-
     }
 
-    const user = {
+    try {
+      const parsed = JSON.parse(data);
 
-      name: this.signupForm.value.name.trim(),
+      this.user = {
+        name: parsed?.name || 'User',
+        email: parsed?.email || '',
+        phone: parsed?.phone || '',
+        address: parsed?.address || '',
+        city: parsed?.city || '',
+        pincode: parsed?.pincode || '',
+        _id: parsed?._id
+      };
 
-      email: this.signupForm.value.email
-        .trim()
-        .toLowerCase(),
+      this.fillForm();
 
-      phone: this.signupForm.value.phone,
-
-      password: this.signupForm.value.password
-
-    };
-
-    console.log("SIGNUP REQUEST:", user);
-
-    this.api.addUser(user).subscribe({
-
-      next: (res: any) => {
-
-        console.log("SIGNUP RESPONSE:", res);
-
-        if (!res.user) {
-
-          alert("Signup Failed");
-
-          return;
-
-        }
-
-        localStorage.setItem(
-          'currentUser',
-          JSON.stringify(res.user)
-        );
-
-        this.signupForm.reset();
-
-        // ✅ LOGIN PAGE
-        this.router.navigate(['/welcome2']);
-
-      },
-
-      error: (err) => {
-
-        console.log("SIGNUP ERROR:", err);
-
-        alert(
-          err.error?.message ||
-          "Signup Failed"
-        );
-
-      }
-
-    });
-
+    } catch (e) {
+      console.log('Corrupted user data');
+      localStorage.removeItem('currentUser');
+      this.router.navigate(['/login']);
+    }
   }
 
+  // ================= FILL FORM =================
+  fillForm(): void {
+    this.addressInput = {
+      phone: this.user?.phone || '',
+      address: this.user?.address || '',
+      city: this.user?.city || '',
+      pincode: this.user?.pincode || ''
+    };
+  }
+
+  // ================= SAVE =================
+ 
+saveAddress(): void {
+
+  if (
+    !this.addressInput.phone.trim() ||
+    !this.addressInput.address.trim() ||
+    !this.addressInput.city.trim() ||
+    !this.addressInput.pincode.trim()
+  ) {
+    alert('All fields are required');
+    return;
+  }
+
+  const isValidPhone = /^[6-9]\d{9}$/.test(this.addressInput.phone);
+
+  if (!isValidPhone) {
+    alert('Please enter a valid 10-digit mobile number');
+    return;
+  }
+
+  const isValidPin = /^[1-9][0-9]{5}$/.test(this.addressInput.pincode);
+
+  if (!isValidPin) {
+    this.router.navigate(['/shipment-code'], {
+      queryParams: { returnUrl: '/profile' }
+    });
+    return;
+  }
+
+  const updatedData = {
+    phone: this.addressInput.phone,
+    address: this.addressInput.address,
+    city: this.addressInput.city,
+    pincode: this.addressInput.pincode
+  };
+
+  this.api.updateUser(this.user._id, updatedData).subscribe({
+
+    next: (res: any) => {
+
+      this.user = {
+        ...this.user,
+        ...updatedData
+      };
+
+      localStorage.setItem('currentUser', JSON.stringify(this.user));
+
+      alert('Profile updated successfully');
+    },
+
+    error: (err) => {
+      console.log(err);
+      alert('Update failed');
+    }
+  });
+}
+
+
+  // ================= CANCEL =================
+  cancelEdit(): void {
+    this.fillForm();
+  }
+
+  // ================= NAVIGATION =================
+  goToOrders(): void {
+    this.router.navigate(['/myorder']);
+  }
+
+  logout(): void {
+    this.cart.clearCart();
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/login']);
+  }
 }

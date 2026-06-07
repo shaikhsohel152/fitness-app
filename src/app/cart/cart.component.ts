@@ -4,18 +4,23 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
-  templateUrl: './cart.component.html'
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
 
   cartItems: any[] = [];
 
-  constructor(private cartService: CartService, private route: Router) {}
+  constructor(
+    private cartService: CartService,
+    private route: Router
+  ) {}
 
   ngOnInit(): void {
 
     this.cartService.cart$.subscribe(items => {
-      this.cartItems = items;
+      // 🔥 IMPORTANT: force new reference
+      this.cartItems = [...(items || [])];
     });
 
   }
@@ -30,32 +35,27 @@ export class CartComponent implements OnInit {
 
   remove(item: any) {
     this.cartService.removeItem(item);
+
+    // 🔥 FORCE UI UPDATE (important fix)
+    this.cartItems = [...this.cartService.getCartItems()];
   }
 
   getTotal() {
     return this.cartService.getTotal();
   }
+
   proceedToCheckout() {
 
-  const user = localStorage.getItem('currentUser');
+    const user = localStorage.getItem('currentUser');
 
-  if (!user) {
-
-    this.route.navigate(
-      ['/without-login'],
-      {
-        queryParams: { returnUrl: '/cart' }
-      }
-    );
-
-  } else {
-
-    this.route.navigate(['/payment-mode']);
+    if (!user) {
+      this.route.navigate(
+        ['/without-login'],
+        { queryParams: { returnUrl: '/cart' } }
+      );
+    } else {
+      this.route.navigate(['/payment-mode']);
+    }
 
   }
-
-}
-
-  
-
 }

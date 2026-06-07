@@ -40,7 +40,7 @@ export class PaymentModeComponent implements OnInit {
     private cartService: CartService,
     private router: Router,
     private api: ApiService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
 
@@ -107,65 +107,70 @@ export class PaymentModeComponent implements OnInit {
   }
 
   /* ================= SAVE PURCHASE ================= */
+savePurchase() {
 
-  savePurchase() {
+  const user = JSON.parse(
+    localStorage.getItem('currentUser') || '{}'
+  );
 
-    const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  console.log('Current User =>', user);
 
-    // 🔥 Full address fix (IMPORTANT)
-    const fullAddress =
-  `${this.userAddress?.address || ''}, ` +
-  `${this.userAddress?.city || ''} - ` +
-  `${this.userAddress?.pincode || ''}`.trim();
+  const fullAddress =
+    `${this.userAddress?.address || ''}, ` +
+    `${this.userAddress?.city || ''} - ` +
+    `${this.userAddress?.pincode || ''}`;
 
-    /* BACKEND SAVE */
-    this.cartItems.forEach(item => {
+  this.cartItems.forEach(item => {
+const purchase = {
 
-      const purchase: Purchase = {
-        name: item.name,
-        brand: item.brand,
-        email: user.email,
-        price: item.price,
-        quantity: item.quantity,
-        address: fullAddress,
-        date: new Date().toLocaleDateString(),
-        image: item.image,
-        
-      };
+  name: user._id,
 
-      this.api.addPurchase(purchase).subscribe({
-        error: (err) => console.log('Purchase error:', err)
-      });
+  email: user.email,
+
+  brand: item.brand,
+
+  price: item.price,
+
+  quantity: item.quantity,
+
+  paymentMode: this.selectedMode,
+
+  upiApp:
+    this.selectedMode === 'UPI'
+      ? this.selectedUpi
+      : '',
+
+  address: fullAddress,
+
+  image: item.image,
+
+  date: new Date().toLocaleDateString()
+
+};
+
+    console.log('Purchase Payload =>', purchase);
+
+    this.api.addPurchase(purchase).subscribe({
+
+      next: (res) => {
+        console.log('Saved To MongoDB', res);
+      },
+
+      error: (err) => {
+        console.log('Mongo Error', err);
+      }
 
     });
 
-    /* LOCAL STORAGE ORDERS */
-    let existingOrders = localStorage.getItem("orders");
-    let ordersArray: any[] = existingOrders ? JSON.parse(existingOrders) : [];
+  });
 
-    this.cartItems.forEach(item => {
-      ordersArray.push({
-        name: item.name,
-        brand: item.brand,
-        price: item.price,
-        quantity: item.quantity,
-        image: item.image,
-        date: new Date().toLocaleDateString()
-      });
-    });
+  this.cartService.clearCart();
 
-    localStorage.setItem("orders", JSON.stringify(ordersArray));
-
-    /* CLEAR CART */
-    this.cartService.clearCart();
-
-    /* NAVIGATE */
-    this.router.navigateByUrl('/welcome3');
-  }
-
+  this.router.navigate(['/welcome3']);
+}
   /* ================= GO PROFILE ================= */
 
   goToProfile() {
-    this.router.navigate(['/porfolio']);
+    this.router.navigate(['/profile']);
   }
 }

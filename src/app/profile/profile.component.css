@@ -1,10 +1,156 @@
-.eye-icon {
-  position: absolute;
-  top: 50%;
-  right: 15px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 1.2rem;
-  user-select: none;
-  padding-top: 25px;
+/* ROOT WRAPPER */
+.profile{
+  background:#0d0d0d;
+  color:#fff;
+  min-height:100vh;
+}
+
+/* HERO */
+.profile-hero{
+  background:#141414;
+  padding:25px 6%;
+  border-bottom:1px solid rgba(245,197,66,0.12);
+}
+
+.user-box{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.avatar{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:#f5c542;
+  color:#0d0d0d;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  font-weight:700;
+}
+
+.user-info h2{
+  margin:0;
+}
+
+.user-info p{
+  color:#bdbdbd;
+  font-size:14px;
+}
+
+.badge{
+  display:inline-block;
+  margin-top:5px;
+  padding:4px 10px;
+  background:#f5c542;
+  color:#000;
+  font-size:12px;
+  border-radius:20px;
+  font-weight:700;
+}
+
+/* BODY */
+.profile-body{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:20px;
+  padding:30px 6%;
+}
+
+/* CARD */
+.card{
+  background:#141414;
+  border:1px solid rgba(245,197,66,0.12);
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:18px;
+}
+
+.card h3{
+  color:#f5c542;
+  margin-bottom:12px;
+}
+
+/* ROW */
+.row{
+    color: white;
+  display:flex;
+  justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+
+/* INPUT */
+input{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:#0d0d0d;
+  color:#fff;
+  outline:none;
+}
+
+input:focus{
+  border-color:#f5c542;
+}
+
+/* BUTTON */
+button{
+  width:100%;
+  margin-top:10px;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:#f5c542;
+  color:#0d0d0d;
+  font-weight:700;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:translateY(-2px);
+}
+
+/* DANGER */
+.danger{
+  background:#2a1111;
+  color:#ff5c5c;
+}
+
+/* SIDEBAR */
+.sidebar{
+  position:sticky;
+  top:90px;
+}
+
+.short-footer {
+    background: #111 !important;
+    border-top: 1px solid rgba(255,255,255,.08);
+    font-family: "Outfit", sans-serif;
+}
+
+.short-footer strong {
+    color: #f5c542;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+
+  .profile-body{
+    grid-template-columns:1fr;
+  }
+
+  .user-box{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .sidebar{
+    position:static;
+  }
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
@@ -8,7 +9,6 @@ import { DetailproductComponent } from './detailproduct/detailproduct.component'
 import { ProductComponent } from './product/product.component';
 import { CardioComponent } from './cardio/cardio.component';
 import { CartComponent } from './cart/cart.component';
-import { ProfileComponent } from './profile/profile.component';
 
 import { GymComponent } from './gym/gym.component';
 import { LoginComponent } from './login/login.component';
@@ -19,36 +19,49 @@ import { Welcome3Component } from './welcome3/welcome3.component';
 import { Welcome4Component } from './welcome4/welcome4.component';
 import { RejectPageComponent } from './reject-page/reject-page.component';
 import { SigninRejectComponent } from './signin-reject/signin-reject.component';
-import { PorfolioComponent } from './porfolio/porfolio.component';
+
 import { WithoutLoginComponent } from './without-login/without-login.component';
 import { ShipmentCodeComponent } from './shipment-code/shipment-code.component';
 import { PaymentModeComponent } from './payment-mode/payment-mode.component';
 import { MyorderComponent } from './myorder/myorder.component';
-
-
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
+
+  // ================= DEFAULT ROUTE =================
   {
     path: '',
-    redirectTo: 'profile',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
+
+  // ================= AUTH =================
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+
+  // ================= MAIN ROUTES =================
   
   {
     path: 'home',
     component: HomeComponent
-  },
-   {
-    path: 'detailproduct/:id',
-    component: DetailproductComponent
   },
   {
     path: 'product',
     component: ProductComponent
   },
   {
+    path: 'detailproduct/:id',
+    component: DetailproductComponent
+  },
+  {
     path: 'about',
     component: AboutComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
   },
   {
     path: 'contact',
@@ -63,18 +76,23 @@ const routes: Routes = [
     component: CartComponent
   },
   {
-    path: 'profile',
-    component: ProfileComponent
-  },
-  
-  {
     path: 'gym',
     component: GymComponent
   },
   {
-    path: 'login',
-    component: LoginComponent
+    path: 'myorder',
+    component: MyorderComponent
   },
+  {
+    path: 'payment-mode',
+    component: PaymentModeComponent
+  },
+  {
+    path: 'shipment-code',
+    component: ShipmentCodeComponent
+  },
+
+  // ================= FLOW / SPECIAL =================
   {
     path: 'welcome',
     component: WelcomeComponent
@@ -100,37 +118,24 @@ const routes: Routes = [
     component: RejectPageComponent
   },
   {
-   path: 'signin-reject',
-   component: SigninRejectComponent
+    path: 'signin-reject',
+    component: SigninRejectComponent
   },
   {
-    path: 'porfolio',
-    component: PorfolioComponent
+    path: 'without-login',
+    component: WithoutLoginComponent
   },
-  {
-   path: 'without-login',
-   component: WithoutLoginComponent
-  },
-  {
-   path: 'shipment-code',
-   component: ShipmentCodeComponent
-  },
-  {
-    path: 'payment-mode',
-    component: PaymentModeComponent
-  },
-  {
-     path: 'myorder',
-     component: MyorderComponent
-  },
+
+  // ================= 404 =================
   {
     path: '**',
     component: Page404Component
   }
+
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

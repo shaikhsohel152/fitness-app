@@ -9,8 +9,8 @@ export class AppComponent {
 
   title = 'myfolder';
 
-  // ngOnInit(): void {
-  //   localStorage.clear();
-  //   sessionStorage.clear();
-  // }
+constructor() {
+    console.log('APP STARTED');
+    localStorage.removeItem('currentUser');
+  }
 }

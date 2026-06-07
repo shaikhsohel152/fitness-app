@@ -8,43 +8,41 @@ import { Router } from '@angular/router';
 })
 export class MyorderComponent implements OnInit {
 
-orders:any[]=[];
+  orders: any[] = [];
+  userEmail: string = '';
 
-constructor(private router:Router){}
+  constructor(private router: Router) {}
 
-ngOnInit(){
+  ngOnInit() {
+    const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    this.userEmail = user.email || '';
 
-this.loadOrders();
+    this.loadOrders();
+  }
 
+  /* ================= LOAD USER SPECIFIC ORDERS ================= */
+  loadOrders() {
+
+  const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+
+  const userKey = user.email;
+
+  const data = localStorage.getItem(`orders_${userKey}`);
+
+  if (data) {
+    this.orders = JSON.parse(data);
+  } else {
+    this.orders = [];
+  }
 }
 
+  /* ================= BACK ================= */
+  goBack() {
+    this.router.navigate(['/profile']);
+  }
 
-/* LOAD ORDERS FROM LOCALSTORAGE */
-
-loadOrders(){
-
-const data = localStorage.getItem("orders");
-
-if(data){
-
-this.orders = JSON.parse(data);
-
-}else{
-
-this.orders = [];
-
-}
-
-}
-
-
-
-/* BACK TO PROFILE */
-
-goBack(){
-
-this.router.navigate(['/porfolio']);
-
-}
-
+  /* ================= GO PRODUCTS ================= */
+  goToProducts() {
+    this.router.navigate(['/product']);
+  }
 }

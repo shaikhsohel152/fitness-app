@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class ApiService {
 
   // ================= BASE URL =================
-  private BASE_URL = "http://localhost:5000";
+ private BASE_URL = "http://localhost:3500";
 
   constructor(private http: HttpClient) {}
 
@@ -53,9 +53,15 @@ export class ApiService {
     return this.http.get(`${this.BASE_URL}/products`);
   }
 
-  // ================= LOGIN =================
-  loginUser(data: any): Observable<any> {
-    return this.http.post(`${this.BASE_URL}/api/login`, data);
-  }
+  // ================= OTP LOGIN (NEW SYSTEM) =================
+sendOtp(email: string): Observable<any> {
+  return this.http.post(`${this.BASE_URL}/api/otp/send-otp`, {
+    email
+  });
+}
+
+verifyOtp(data: any): Observable<any> {
+  return this.http.post(`${this.BASE_URL}/api/otp/verify-otp`, data);
+}
 
 }

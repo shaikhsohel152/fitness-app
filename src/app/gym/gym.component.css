@@ -1,158 +1,279 @@
-/* HERO */
+/* ================= ROOT ================= */
+
+:host {
+    display: block;
+    width: 100%;
+    min-height: 100vh;
+    background: #0d0d0d;
+    color: white;
+}
+
+/* ================= HERO ================= */
+
 .hero-section {
-  height: 90vh;
-  background: linear-gradient(135deg, #000, #111);
+    min-height: 60vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 80px 20px;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,.75),
+        rgba(0,0,0,.75)
+    ),
+    url('/assets/home page photo.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.brand-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.brand-box i {
+    font-size: 4rem;
+    color: #f5c542;
+    margin-bottom: 10px;
 }
 
 .gym-title {
-  font-size: 64px;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: 3px;
+    font-family: "Teko", sans-serif;
+    font-size: clamp(4rem, 10vw, 8rem);
+    color: #f5c542;
+    letter-spacing: 4px;
 }
 
-/* FEATURES */
+/* ================= SECTIONS ================= */
+
+.features-section,
+.join-gym-section,
+.short-footer {
+    background: #0d0d0d !important;
+}
+
 .section-title {
-  font-size: 36px;
-  font-weight: 700;
+    font-family: "Teko", sans-serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    color: white;
+    text-align: center;
 }
 
 .section-title span {
-  color: #ffc107;
+    color: #f5c542;
 }
 
+/* ================= FEATURES ================= */
+
 .feature-box {
-  background: #111;
-  border-radius: 18px;
-  overflow: hidden;
-  transition: 0.3s ease;
+    height: 100%;
+
+    background: #171717;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255,255,255,.05);
+
+    transition: .3s;
 }
 
 .feature-box:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 25px #ffb703;
-}
+    transform: translateY(-8px);
 
-.feature-img {
-  position: relative;
+    box-shadow:
+    0 15px 35px rgba(245,197,66,.18);
 }
 
 .feature-img img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.feature-content {
+    padding: 25px;
 }
 
 .feature-content h4 {
-  color: #fff;
+    font-family: "Teko", sans-serif;
+    font-size: 2rem;
+    color: #f5c542;
 }
 
 .feature-content p {
-  color: #aaa;
-  font-size: 14px;
+    color: #cfcfcf;
+    line-height: 1.7;
 }
 
-/* JOIN GYM */
+/* ================= JOIN SECTION ================= */
+
 .join-gym-section {
-  background: #0f0f0f;
+    padding: 80px 0;
 }
 
 .join-title {
-  font-size: 42px;
-  font-weight: 800;
-  color: #fff;
+    font-family: "Teko", sans-serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    color: white;
+    line-height: 1;
 }
 
 .join-title span {
-  color: #ffc107;
+    color: #f5c542;
 }
 
 .join-desc {
-  color: #aaa;
-  font-size: 16px;
-  max-width: 500px;
+    color: #cfcfcf;
+    margin-top: 20px;
+    line-height: 1.8;
 }
+
+/* ================= CARD ================= */
 
 .join-card {
-  background: #111;
-  padding: 30px;
-  border-radius: 18px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    background: #171717;
+
+    border-radius: 24px;
+
+    padding: 35px;
+
+    border: 1px solid rgba(255,255,255,.06);
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,.35);
 }
+
+.join-card h3 {
+    font-family: "Teko", sans-serif;
+    font-size: 2.5rem;
+    color: #f5c542 !important;
+}
+
+/* ================= FORM ================= */
+
+.form-control {
+    height: 56px;
+
+    background: #0f0f0f !important;
+
+    border: 1px solid #2a2a2a !important;
+
+    color: white !important;
+
+    border-radius: 14px;
+}
+
+.form-control::placeholder {
+    color: #999;
+}
+
+.form-control:focus {
+    border-color: #f5c542 !important;
+
+    box-shadow:
+    0 0 0 .15rem rgba(245,197,66,.25) !important;
+}
+
+select.form-control {
+    color: white !important;
+}
+
+/* ================= BUTTON ================= */
 
 .join-btn {
-  background: linear-gradient(135deg, #ffb703, #ffc107);
-  border: none;
-  padding: 12px;
-  font-weight: bold;
-  border-radius: 10px;
+    height: 56px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: #f5c542;
+
+    color: black;
+
+    font-weight: 700;
+
+    transition: .3s;
 }
 
+.join-btn:hover {
+    transform: translateY(-3px);
+}
 
-/* RESPONSIVE */
+/* ================= FOOTER ================= */
+
+.short-footer {
+    border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.short-footer strong {
+    color: #f5c542;
+}
+
+/* ================= FORCE REMOVE WHITE BG ================= */
+.error{
+  color:#ff4d4d;
+  font-size:12px;
+  margin-bottom:6px;
+  display:block;
+}
+
+.container,
+.row,
+.col,
+[class*="col-"] {
+    background: transparent !important;
+}
+
+/* ================= RESPONSIVE ================= */
+
 @media (max-width: 992px) {
-  .gym-title {
-    font-size: 48px;
-  }
 
-  .join-title {
-    font-size: 34px;
-  }
+    .join-title,
+    .join-desc {
+        text-align: center;
+    }
+
+    .join-card {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .hero-section {
+        min-height: 45vh;
+    }
+
+    .feature-img img {
+        height: 220px;
+    }
+
+    .join-card {
+        padding: 25px;
+    }
 }
 
 @media (max-width: 576px) {
-  .gym-title {
-    font-size: 36px;
-  }
 
-  .section-title {
-    font-size: 28px;
-  }
+    .hero-section {
+        min-height: 40vh;
+        padding: 50px 15px;
+    }
 
-  .join-title {
-    font-size: 28px;
-  }
+    .join-card {
+        padding: 20px;
+    }
 
-  .feature-img img {
-    height: 170px;
-  }
+    .feature-content {
+        padding: 20px;
+    }
 }
-.brand-box i {
-  font-size: 48px;          /* icon size */
-  line-height: 1;
-  margin-top: 6px;          /* vertical alignment fix */
-}
-
-/* GYM TITLE */
-.gym-title {
-  font-size: 72px;
-  font-weight: 800;
-  letter-spacing: 3px;
-  margin: 0;
-}
-@media (max-width: 992px) {
-  .brand-box i {
-    font-size: 38px;
-  }
-
-  .gym-title {
-    font-size: 52px;
-  }
-}
-
-@media (max-width: 576px) {
-  .brand-box {
-    flex-direction: column;
-  }
-
-  .brand-box i {
-    font-size: 34px;
-    margin-bottom: 6px;
-  }
-
-  .gym-title {
-    font-size: 40px;
-    letter-spacing: 2px;
-  }
-}
-

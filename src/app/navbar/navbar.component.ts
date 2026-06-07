@@ -13,10 +13,11 @@ export class NavbarComponent implements OnInit {
 
   cartCount = 0;
   isLoggedIn = false;
-  userName: string | null = null;
+  userName = '';
 
   showSearch = false;
   searchText = '';
+  menuOpen = false;
 
   constructor(
     private cartService: CartService,
@@ -26,69 +27,74 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // ❌ REMOVE THIS (causes logout bug)
-    // sessionStorage logic hata do
-
-    // 🛒 Cart count
+    // CART COUNT
     this.cartService.cart$.subscribe(cart => {
-      this.cartCount = cart.reduce(
-        (count, item) => count + item.quantity,
-        0
-      );
+      this.cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
     });
 
     this.loadUser();
 
+    // route change pe refresh user
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.loadUser();
-      });
+      .subscribe(() => this.loadUser());
+
+    // tab refresh / storage sync (important fix)
+    window.addEventListener('storage', () => this.loadUser());
   }
 
-  // 👤 Load user safely
-  loadUser(): void {
+ loadUser(): void {
+  const data = localStorage.getItem('currentUser');
 
-    const user = localStorage.getItem('currentUser');
-
-    if (user) {
-      const parsedUser = JSON.parse(user);
-
-      this.isLoggedIn = true;
-
-      // ✅ ONLY name (no fallback confusion)
-      this.userName = parsedUser.name;
-
-    } else {
-      this.isLoggedIn = false;
-      this.userName = null;
-    }
+  if (!data) {
+    this.isLoggedIn = false;
+    this.userName = '';
+    return;
   }
+
+  try {
+    const user = JSON.parse(data);
+
+    this.isLoggedIn = true;
+
+    // 🔥 SAFE NAME EXTRACTION (FIX)
+    this.userName =
+      user?.name ||
+      user?.userName ||
+      user?.fullName ||
+      user?.profile?.name ||
+      'User';
+
+    console.log("NAVBAR USER:", user);
+
+  } catch (e) {
+    console.log('Invalid user data');
+    this.isLoggedIn = false;
+    this.userName = '';
+  }
+}
 
   openProfile(): void {
-    this.isLoggedIn
-      ? this.router.navigate(['/porfolio'])
-      : this.router.navigate(['/profile']);
+    this.router.navigate([this.isLoggedIn ? '/profile' : '/login']);
   }
 
   logout(): void {
     localStorage.removeItem('currentUser');
-    this.loadUser();
+    this.isLoggedIn = false;
+    this.userName = '';
     this.router.navigate(['/home']);
-  }
-
-  openSearch(): void {
-    this.showSearch = true;
-  }
-
-  closeSearch(): void {
-    if (!this.searchText.trim()) {
-      this.showSearch = false;
-    }
   }
 
   onSearch(): void {
     this.searchService.searchText.next(this.searchText);
     this.router.navigate(['/product']);
+  }
+
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  openCart(): void {
+    this.router.navigate(['/cart']);
   }
 }

@@ -1,112 +1,169 @@
- /* You can add global styles to this file, and also import other style files 
-.active{
-  color: crimson !important;
-}
+/* ================= GLOBAL RESET ================= */
 
- .customCardContainer{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 30px;
-} 
-
-.customCardContainer .card{
-  box-shadow: 0px 0px 0.85rem black;
-  transition: all linear 500ms;
-  cursor: pointer;
-}
-
-.customCardContainer .card img{
-  width: 100%;
-}
-
-.customCardContainer .card:hover{
-  scale: 0.9;
-}
-
-
-.customCardContainerBottle{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 30px;
-}
-.navbar{
-  background-color: rgb(0, 0, 0);
-
-}  */
- 
-
- 
-.navlink{
-  position: relative !important;
-}
-
-.navlink:hover {
-  text-decoration: underline !important;
-  border-bottom: 2px solid rgb(0, 0, 0) !important;
-}
-
-.navlink::after{
-   content: ''!important;
-  opacity: 0 !important;
-  transition: all 0.2s!important;
-   height: 2px !important;
-  width: 100% !important;
-  background-color: black !important;
-  position: absolute !important;
-  bottom: 0 !important ;
-  left: 0 !important;
-}
-
-.navlink:hover::after{
- 
-  opacity: 1 !important;
- 
-}
-
-body{
-  background-color: #6c757d !important;
-}
-html, body {
-  height: 100%;
+* {
   margin: 0;
-}
-/* styles.css */
-
-/* Container spacing */
-/* Top-right professional toast */
-.toast-container {
-  top: 80px !important;   /* navbar ke niche */
-  right: 20px !important; /* top-right edge se thoda gap */
-  left: auto !important;
-  bottom: auto !important;
-  z-index: 1050 !important; /* sabke upar */
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Toast box */
-.toast {
-  min-width: 350px !important;
-  max-width: 400px !important;
-  border-radius: 12px !important;
-  padding: 16px 22px !important;
-  font-size: 14px !important;
-  box-shadow: 0 10px 35px rgba(0,0,0,0.35) !important;
-  opacity: 0;
-  transform: translateX(50px);
-  animation: slideIn 0.4s forwards;
+/* ================= ROOT ================= */
+
+html,
+body {
+    padding-top: 35px;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+
+  background: #0d0d0d;
+  color: #ffffff;
+
+  font-family: "Outfit", sans-serif;
 }
 
-/* Slide-in animation */
-@keyframes slideIn {
-  to {
-    opacity: 1;
-    transform: translateX(0);
+app-root {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ================= TYPOGRAPHY ================= */
+
+h1,
+h2,
+h3,
+.logo,
+.hero-title,
+.section-title {
+  font-family: "Teko", sans-serif;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+
+p,
+span,
+a,
+button,
+input,
+textarea,
+select,
+label {
+  font-family: "Outfit", sans-serif;
+}
+
+/* ================= LINKS ================= */
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ================= SCROLLBAR ================= */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f5c542;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffd95c;
+}
+
+/* ================= GRID ================= */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* ================= CARD ================= */
+
+.card {
+  background: #171717;
+
+  border: 1px solid rgba(255,255,255,0.05);
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  transition: all 0.35s ease;
+
+  box-shadow:
+  0 8px 25px rgba(0,0,0,0.25);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+
+  box-shadow:
+  0 15px 35px rgba(245,197,66,0.15);
+}
+
+/* ================= IMAGES ================= */
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ================= BUTTONS ================= */
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: "Outfit", sans-serif;
+}
+
+/* ================= INPUTS ================= */
+
+input,
+textarea,
+select {
+  font-family: "Outfit", sans-serif;
+}
+
+/* ================= SECTION SPACING ================= */
+
+section {
+  padding: 80px 6%;
+}
+
+/* ================= CONTAINER ================= */
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+
+  section {
+    padding: 60px 5%;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2.4rem;
   }
 }
-
-/* Colors */
-.toast-success { background: linear-gradient(135deg,#16a34a,#22c55e) !important; }
-.toast-error   { background: linear-gradient(135deg,#dc2626,#ef4444) !important; }
-.toast-info    { background: linear-gradient(135deg,#2563eb,#3b82f6) !important; }
-.toast-warning { background: linear-gradient(135deg,#f59e0b,#facc15) !important; color: #000 !important; }
-
-

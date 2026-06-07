@@ -1,198 +1,96 @@
-<div class="container mt-5 pt-5">
+<div class="profile">
 
-  <div class="row justify-content-center">
+  <!-- HERO -->
+  <section class="profile-hero">
 
-    <div class="col-md-6 col-lg-5">
+    <div class="user-box">
 
-      <div class="card bg-dark text-light shadow-lg rounded-4">
+      <div class="avatar">
+        {{ user?.name?.charAt(0) || 'U' }}
+      </div>
 
-        <div class="card-body p-4">
-
-          <h2 class="text-center fw-bold text-warning mb-4">
-            Sign Up To GymGearPro 💪
-          </h2>
-
-          <form
-            [formGroup]="signupForm"
-            (ngSubmit)="onSignup()"
-          >
-
-            <!-- NAME -->
-            <div class="mb-3">
-
-              <label class="form-label">
-                Full Name
-              </label>
-
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Enter your name"
-                formControlName="name"
-              />
-
-              <div
-                class="text-danger mt-1"
-                *ngIf="signupForm.get('name')?.touched &&
-                       signupForm.get('name')?.invalid"
-              >
-
-                <span
-                  *ngIf="signupForm.get('name')?.errors?.['required']"
-                >
-                  Name is required
-                </span>
-
-                <span
-                  *ngIf="signupForm.get('name')?.errors?.['pattern']"
-                >
-                  Only letters are allowed
-                </span>
-
-              </div>
-
-            </div>
-
-            <!-- EMAIL -->
-            <div class="mb-3">
-
-              <label class="form-label">
-                Email
-              </label>
-
-              <input
-                type="email"
-                class="form-control"
-                placeholder="Enter your email"
-                formControlName="email"
-              />
-
-              <span
-                class="text-danger"
-                *ngIf="signupForm.get('email')?.touched &&
-                       signupForm.get('email')?.invalid"
-              >
-                Enter valid email
-              </span>
-
-            </div>
-
-            <!-- PHONE -->
-            <div class="mb-3">
-
-              <label class="form-label">
-                Phone
-              </label>
-
-              <input
-                type="text"
-                class="form-control"
-                placeholder="10 digit number"
-                formControlName="phone"
-              />
-
-              <span
-                class="text-danger"
-                *ngIf="signupForm.get('phone')?.touched &&
-                       signupForm.get('phone')?.invalid"
-              >
-                Enter valid phone number
-              </span>
-
-            </div>
-
-            <!-- PASSWORD -->
-            <div class="mb-3 position-relative">
-
-              <label class="form-label">
-                Password
-              </label>
-
-              <input
-                [type]="showPassword ? 'text' : 'password'"
-                class="form-control pe-5"
-                placeholder="Create password"
-                formControlName="password"
-              />
-
-              <span
-                class="eye-icon"
-                (click)="togglePassword()"
-              >
-                {{ showPassword ? '🙈' : '👁️' }}
-              </span>
-
-              <span
-                class="text-danger"
-                *ngIf="signupForm.get('password')?.touched &&
-                       signupForm.get('password')?.invalid"
-              >
-                Password must be at least 8 characters
-              </span>
-
-            </div>
-
-            <!-- CONFIRM PASSWORD -->
-            <div class="mb-4 position-relative">
-
-              <label class="form-label">
-                Confirm Password
-              </label>
-
-              <input
-                [type]="showConfirmPassword ? 'text' : 'password'"
-                class="form-control pe-5"
-                placeholder="Confirm password"
-                formControlName="confirmPassword"
-              />
-
-              <span
-                class="eye-icon"
-                (click)="toggleConfirmPassword()"
-              >
-                {{ showConfirmPassword ? '🙈' : '👁️' }}
-              </span>
-
-              <span
-                class="text-danger"
-                *ngIf="signupForm.hasError('passwordMismatch') &&
-                       signupForm.get('confirmPassword')?.touched"
-              >
-                Passwords do not match
-              </span>
-
-            </div>
-
-            <!-- BUTTON -->
-            <button
-              type="submit"
-              class="btn btn-warning w-100 fw-bold"
-              [disabled]="signupForm.invalid"
-            >
-              Sign Up
-            </button>
-
-          </form>
-
-          <p class="text-center mt-3">
-
-            Already have an account?
-
-            <a
-              routerLink="/login"
-              class="text-warning fw-semibold"
-            >
-              Login
-            </a>
-
-          </p>
-
-        </div>
-
+      <div class="user-info">
+        <h2>{{ user?.name }}</h2>
+        <p>{{ user?.email }}</p>
+        <span class="badge">Premium Member</span>
       </div>
 
     </div>
 
+  </section>
+
+  <!-- BODY -->
+  <section class="profile-body container">
+
+    <!-- LEFT -->
+    <aside class="sidebar">
+
+      <div class="card">
+        <h3>Quick Actions</h3>
+
+        <button (click)="goToOrders()">🛒 My Orders</button>
+        <button routerLink="/product">🏋️ Shop Products</button>
+        <button class="danger" (click)="logout()">🚪 Logout</button>
+      </div>
+
+    </aside>
+
+    <!-- RIGHT -->
+    <main class="content">
+
+      <!-- PROFILE CARD -->
+      <div class="card">
+        <h3>Profile Info</h3>
+
+        <div class="row">
+          <span>Name</span>
+          <b>{{ user?.name }}</b>
+        </div>
+
+        <div class="row">
+          <span>Email</span>
+          <b>{{ user?.email }}</b>
+        </div>
+
+      </div>
+
+      <!-- CONTACT -->
+      <div class="card">
+        <h3>Contact Number</h3>
+
+        <input
+          type="text"
+          [(ngModel)]="addressInput.phone"
+          placeholder="Enter phone number"
+        />
+
+        <button (click)="saveAddress()">Save Contact</button>
+      </div>
+
+      <!-- ADDRESS -->
+      <div class="card">
+        <h3>Delivery Address</h3>
+
+        <input [(ngModel)]="addressInput.address" placeholder="Address">
+        <input [(ngModel)]="addressInput.city" placeholder="City">
+        <input [(ngModel)]="addressInput.pincode" placeholder="Pincode">
+
+        <button (click)="saveAddress()">Save Address</button>
+      </div>
+
+    </main>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="short-footer text-light py-3">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+    
+    <div class="mb-2 mb-md-0">
+      <strong><i class="fas fa-dumbbell me-2 text-warning"></i>GymGear Pro</strong> &copy; 2026. All rights reserved.
+    </div>
+
   </div>
+</footer>
 
 </div>

@@ -1,77 +1,238 @@
-/* CAROUSEL – responsive height only */
-.carousel-img {
-  width: 100%;
-  height: 70vh;
-  object-fit: cover;
-  margin-top: 80px;
+/* ================= HERO CAROUSEL ================= */
+#heroCarousel {
+    margin-bottom: 0 !important;
 }
 
-/* CARDS – desktop same */
+.carousel,
+.carousel-inner,
+.carousel-item {
+    margin-bottom: 0 !important;
+}
+
+.home-container {
+    background: #0d0d0d;
+    margin-top: 0 !important;
+    padding-top: 40px;
+}
+
+body {
+    background: #0d0d0d !important;
+}
+#heroCarousel {
+    margin-bottom: 80px;
+}
+
+.carousel-item {
+    height: 90vh;
+    min-height: 500px;
+}
+
+.carousel-img {
+    width: 100%;
+    height: 90vh;
+    object-fit: cover;
+    filter: brightness(45%);
+}
+
+.carousel-caption {
+    bottom: 20%;
+}
+
+.carousel-caption h3 {
+    font-family: "Teko", sans-serif;
+    font-size: clamp(3rem, 6vw, 6rem);
+    color: #f5c542;
+    letter-spacing: 2px;
+}
+
+.carousel-caption p {
+    font-family: "Outfit", sans-serif;
+    font-size: 1.1rem;
+    color: white;
+}
+
+/* ================= MAIN SECTION ================= */
+
+.home-container {
+    width: 100%;
+    background: #0d0d0d;
+    padding: 0 6% 80px;
+    
+}
+
+.main-title {
+    font-family: "Teko", sans-serif !important;
+    font-size: clamp(3rem, 6vw, 5rem);
+    color: #f5c542 !important;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #bdbdbd !important;
+    font-size: 1.1rem;
+    margin-bottom: 60px;
+}
+
+/* ================= CARDS ================= */
+
 .gym-card {
-  display: flex;
-  align-items: center;
-  margin: 60px 0;
-  border-radius: 12px;
-  overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+
+    margin-bottom: 50px;
+
+    background: #171717 !important;
+
+    border: 1px solid rgba(255,255,255,0.05);
+
+    border-radius: 24px;
+
+    overflow: hidden;
+
+    transition: .4s ease;
+}
+
+.gym-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+    0 15px 35px rgba(245,197,66,.12);
 }
 
 .gym-card.reverse {
-  flex-direction: row-reverse;
+    flex-direction: row-reverse;
 }
 
-.gym-card .image {
-  flex: 1;
-  max-height: 350px;
-  overflow: hidden;
+.image {
+    flex: 1;
 }
 
-.gym-card .image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.image img {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    object-fit: cover;
 }
 
-.gym-card .content {
-  flex: 1;
-  padding: 40px;
+.content {
+    flex: 1;
+    padding: 40px;
 }
 
-/* hover same */
-.gym-card img {
-  transition: transform 0.4s ease;
+.content h2 {
+    font-family: "Teko", sans-serif;
+    font-size: 3rem;
+    color: #f5c542;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
 }
 
-.gym-card:hover img {
-  transform: scale(1.05);
+.content p {
+    font-family: "Outfit", sans-serif;
+    line-height: 1.8;
+    color: #d0d0d0;
 }
 
-/* 🔥 ONLY MOBILE RESPONSIVE FIX */
+/* ================= BUTTON ================= */
+
+.btn {
+    margin-top: 25px;
+
+    background: #f5c542;
+    color: #000;
+
+    border: none;
+
+    padding: 12px 24px;
+
+    border-radius: 12px;
+
+    font-weight: 600;
+
+    transition: .3s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+/* ================= FOOTER ================= */
+
+.short-footer {
+    background: #111 !important;
+    border-top: 1px solid rgba(255,255,255,.08);
+    font-family: "Outfit", sans-serif;
+}
+
+.short-footer strong {
+    color: #f5c542;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 992px) {
+
+    .gym-card,
+    .gym-card.reverse {
+        flex-direction: column;
+    }
+
+    .image,
+    .content {
+        width: 100%;
+    }
+
+    .image img {
+        min-height: 300px;
+    }
+
+    .content {
+        padding: 30px;
+    }
+}
+
 @media (max-width: 768px) {
 
-  /* carousel height adjust */
-  .carousel-img {
-    height: 45vh;
-  }
+    .carousel-item,
+    .carousel-img {
+        height: 65vh;
+    }
 
-  /* cards stack vertically */
-  .gym-card,
-  .gym-card.reverse {
-    flex-direction: column;
-  }
+    .carousel-caption {
+        bottom: 15%;
+    }
 
-  .gym-card .image {
-    max-height: 220px;
-  }
+    .home-container {
+        padding: 0 4% 60px;
+    }
 
-  .gym-card .content {
-    padding: 20px;
-    text-align: center;
-  }
+    .content h2 {
+        font-size: 2.5rem;
+    }
+
+    .content p {
+        font-size: .95rem;
+    }
 }
 
-/* 🔥 EXTRA SMALL MOBILE */
-@media (max-width: 480px) {
-  .carousel-img {
-    height: 35vh;
-  }
+@media (max-width: 576px) {
+
+    .carousel-item,
+    .carousel-img {
+        height: 55vh;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .content h2 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: .95rem;
+    }
 }

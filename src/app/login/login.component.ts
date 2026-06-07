@@ -1,15 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-
-import {
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
-
-import { Router } from '@angular/router';
-
+import { Component } from '@angular/core';
 import { ApiService } from '../services/api.service';
-
+import { Router } from '@angular/router';
 import { CartService } from '../service/cart.service';
 
 @Component({
@@ -17,84 +8,118 @@ import { CartService } from '../service/cart.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+export class LoginComponent {
 
-export class LoginComponent implements OnInit {
+  step: number = 1;
 
-  loginForm!: FormGroup;
+  email: string = '';
+  otp: string = '';
+  name: string = '';
 
-  showPassword = false;
+  loading: boolean = false;
 
   constructor(
     private api: ApiService,
     private router: Router,
     private cartService: CartService
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
+  // ================= SEND OTP =================
+  sendOtp(): void {
 
-    this.loginForm = new FormGroup({
-
-      email: new FormControl('', [
-        Validators.required,
-        Validators.email
-      ]),
-
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(8)
-      ])
-
-    });
-
-  }
-
-  togglePassword(): void {
-
-    this.showPassword = !this.showPassword;
-
-  }
-
-  handleLogin(): void {
-
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
+    if (!this.email.trim()) {
+      alert('Email required');
       return;
     }
 
-    console.log("LOGIN REQUEST:", this.loginForm.value);
+    this.loading = true;
 
-    this.api.loginUser(this.loginForm.value).subscribe({
+    this.api.sendOtp(this.email).subscribe({
 
-      next: (res: any) => {
+      next: (res) => {
 
-        console.log("LOGIN RESPONSE:", res);
+        console.log(res);
 
-        const user = res.user;
+        this.step = 2;
 
-        if (!user || !user.email) {
-          this.router.navigate(['/signin-reject']);
-          return;
-        }
+        this.loading = false;
 
-        // clear cart
-        this.cartService.clearCart();
-
-        // save user globally
-        localStorage.setItem('currentUser', JSON.stringify(user));
-
-        // 🔥 FIX: redirect to welcome1
-        this.router.navigate(['/welcome1'], {
-          state: {
-            name: user.name
-          }
-        });
+        alert('OTP sent successfully 📩');
       },
 
       error: (err) => {
-        console.log("LOGIN ERROR:", err);
-        this.router.navigate(['/signin-reject']);
+
+        console.log(err);
+
+        this.loading = false;
+
+        alert('Failed to send OTP ❌');
       }
 
     });
   }
+
+  // ================= VERIFY OTP =================
+  verifyOtp(): void {
+
+    if (
+      !this.name.trim() ||
+      !this.email.trim() ||
+      !this.otp.trim()
+    ) {
+      alert('All fields required');
+      return;
+    }
+
+    this.loading = true;
+
+    this.api.verifyOtp({
+      name: this.name,
+      email: this.email,
+      otp: this.otp
+    }).subscribe({
+
+      next: (res: any) => {
+
+        console.log('OTP RESPONSE:', res);
+
+        this.loading = false;
+
+        const user = res?.user || {
+          name: this.name,
+          email: this.email
+        };
+
+        // Save logged in user
+        localStorage.setItem(
+          'currentUser',
+          JSON.stringify(user)
+        );
+
+        // Clear old cart
+        this.cartService.clearCart();
+        localStorage.removeItem('cart');
+
+        alert('Login Successful 🚀');
+
+        this.router.navigate(['/profile']);
+      },
+
+      error: (err) => {
+
+        console.log(err);
+
+        this.loading = false;
+
+        alert('Invalid OTP ❌');
+      }
+
+    });
+  }
+
+  // ================= RESEND OTP =================
+  resendOtp(): void {
+    this.sendOtp();
+  }
+
 }

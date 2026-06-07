@@ -1,124 +1,166 @@
-<div class="payment-page">
+<div class="checkout">
 
-  <div class="payment-container">
+  <!-- HEADER -->
+
+  <div class="checkout-header">
+
+    <div class="header-left">
+
+      <span class="checkout-badge">
+        🔒 Secure Checkout
+      </span>
+
+      <h1>Checkout</h1>
+
+      <p>
+        Complete your payment securely and place your order.
+      </p>
+
+    </div>
+
+    <div class="amount-card">
+
+      <span>Total Amount</span>
+
+      <h2>₹ {{ totalAmount }}</h2>
+
+    </div>
+
+  </div>
+
+  <!-- MAIN GRID -->
+
+  <div class="checkout-grid">
 
     <!-- LEFT -->
 
-    <div class="payment-left">
+    <div class="checkout-main">
 
-      <!-- TITLE -->
+      <!-- DELIVERY DETAILS -->
 
-      <div class="top-section">
+      <div class="card">
 
-        <div>
+        <div class="section-header">
 
-          <h1 class="main-title">
-            Secure Checkout
-          </h1>
+          <h3>Delivery Details</h3>
 
-          <p class="sub-title">
-            Complete your order securely
-          </p>
+          <button
+            class="edit-btn"
+            (click)="goToProfile()">
+
+            Edit
+
+          </button>
 
         </div>
 
-        <div class="amount-box">
+        <div class="delivery-box">
 
-          <span>Total Amount</span>
+          <div class="avatar">
 
-          <h2>
-            ₹ {{totalAmount}}
-          </h2>
+            {{ userAddress?.name?.charAt(0) || 'U' }}
 
-        </div>
+          </div>
 
-      </div>
+          <div class="delivery-content">
 
-      <!-- PAYMENT METHODS -->
+            <h4>{{ userAddress?.name }}</h4>
 
-      <div class="premium-card">
+            <p>{{ userAddress?.phone }}</p>
 
-        <h3 class="section-title">
-          Select Payment Method
-        </h3>
+            <span>
 
-        <div class="payment-grid">
+              {{ userAddress?.address }},
+              {{ userAddress?.city }} -
+              {{ userAddress?.pincode }}
 
-          <button class="payment-btn" [class.active-payment]="selectedMode==='COD'" (click)="selectMode('COD')">
+            </span>
 
-            <div class="icon">🚚</div>
-
-            <div>
-
-              <h5>Cash On Delivery</h5>
-              <p>Pay after delivery</p>
-
-            </div>
-
-          </button>
-
-          <button class="payment-btn" [class.active-payment]="selectedMode==='UPI'" (click)="selectMode('UPI')">
-
-            <div class="icon">📱</div>
-
-            <div>
-
-              <h5>UPI Payment</h5>
-              <p>Fast & Secure</p>
-
-            </div>
-
-          </button>
-
-          <button class="payment-btn" [class.active-payment]="selectedMode==='Debit Card'"
-            (click)="selectMode('Debit Card')">
-
-            <div class="icon">💳</div>
-
-            <div>
-
-              <h5>Debit Card</h5>
-              <p>All banks supported</p>
-
-            </div>
-
-          </button>
-
-          <button class="payment-btn" [class.active-payment]="selectedMode==='Credit Card'"
-            (click)="selectMode('Credit Card')">
-
-            <div class="icon">💎</div>
-
-            <div>
-
-              <h5>Credit Card</h5>
-              <p>Secure Payment</p>
-
-            </div>
-
-          </button>
+          </div>
 
         </div>
 
       </div>
 
-      <!-- ADDRESS -->
+      <!-- PAYMENT METHOD -->
 
-      <div *ngIf="userAddress?.address" class="premium-card">
+      <div class="card">
 
-        <h3 class="section-title">
-          Delivery Address
-        </h3>
+        <h3>Select Payment Method</h3>
 
-        <div class="address-box">
+        <div class="methods">
 
-          <p><span>Name :</span> {{userAddress.name}}</p>
+          <button
+            (click)="selectMode('COD')"
+            [class.active]="selectedMode==='COD'">
 
-          <p><span>Address :</span> {{userAddress.address}}</p>
+            <span class="icon">🚚</span>
 
-          <p><span>City :</span> {{userAddress.city}}</p>
+            <div>
 
-          <p><span>Pincode :</span> {{userAddress.pincode}}</p>
+              <strong>Cash On Delivery</strong>
+
+              <small>
+                Pay after delivery
+              </small>
+
+            </div>
+
+          </button>
+
+          <button
+            (click)="selectMode('UPI')"
+            [class.active]="selectedMode==='UPI'">
+
+            <span class="icon">📱</span>
+
+            <div>
+
+              <strong>UPI Payment</strong>
+
+              <small>
+                Instant payment
+              </small>
+
+            </div>
+
+          </button>
+
+          <button
+            (click)="selectMode('Debit Card')"
+            [class.active]="selectedMode==='Debit Card'">
+
+            <span class="icon">💳</span>
+
+            <div>
+
+              <strong>Debit Card</strong>
+
+              <small>
+                Secure transaction
+              </small>
+
+            </div>
+
+          </button>
+
+          <button
+            (click)="selectMode('Credit Card')"
+            [class.active]="selectedMode==='Credit Card'">
+
+            <span class="icon">💎</span>
+
+            <div>
+
+              <strong>Credit Card</strong>
+
+              <small>
+                Fast & secure
+              </small>
+
+            </div>
+
+          </button>
 
         </div>
 
@@ -126,99 +168,86 @@
 
       <!-- UPI -->
 
-      <div *ngIf="selectedMode==='UPI'" class="premium-card">
+      <div
+        *ngIf="selectedMode==='UPI'"
+        class="card">
 
-        <h3 class="section-title">
-          Select UPI App
-        </h3>
+        <h3>UPI Payment</h3>
 
-        <select class="premium-input" [(ngModel)]="selectedUpi" name="upi">
+        <select [(ngModel)]="selectedUpi">
 
-          <option value="">Choose App</option>
+          <option value="">
+            Select UPI App
+          </option>
+
           <option>GPay</option>
+
           <option>PhonePe</option>
+
           <option>Paytm</option>
 
         </select>
 
-      </div>
+        <div
+          *ngIf="selectedUpi"
+          class="qr-section">
 
-      <!-- QR -->
+          <img
+            [src]="'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=PAY-'+totalAmount">
 
-      <div *ngIf="selectedMode==='UPI' && selectedUpi" class="premium-card qr-section">
+          <p>
 
-        <img [src]="'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=DemoPayment-'+totalAmount"
-          class="qr-img">
+            Scan QR using
+            {{ selectedUpi }}
 
-        <h4>
-          Scan & Pay
-        </h4>
-
-        <p>
-          Pay using {{selectedUpi}}
-        </p>
-
-      </div>
-
-      <!-- CARD -->
-
-      <div *ngIf="selectedMode==='Debit Card' || selectedMode==='Credit Card'" class="premium-card">
-
-        <h3 class="section-title">
-          Card Details
-        </h3>
-
-        <input class="premium-input" placeholder="Card Number" [(ngModel)]="card.number" name="cardNumber">
-
-        <input class="premium-input" placeholder="Card Holder Name" [(ngModel)]="card.name" name="cardName">
-
-        <div class="input-row">
-
-          <input class="premium-input" placeholder="MM/YY" [(ngModel)]="card.expiry" name="expiry">
-
-          <input class="premium-input" placeholder="CVV" [(ngModel)]="card.cvv" name="cvv">
+          </p>
 
         </div>
 
       </div>
 
-      <!-- WARNING -->
+      <!-- CARD DETAILS -->
 
-      <div *ngIf="!userAddress?.address" class="warning-box">
+      <div
+        *ngIf="selectedMode!=='COD' && selectedMode!=='UPI'"
+        class="card">
 
-        <div class="warning-left">
+        <h3>Card Details</h3>
 
-          <div class="warning-icon">
-            ⚠
-          </div>
+        <input
+          type="text"
+          placeholder="Card Number"
+          [(ngModel)]="card.number">
 
-          <div>
+        <input
+          type="text"
+          placeholder="Name On Card"
+          [(ngModel)]="card.name">
 
-            <h4>
-              Address Missing
-            </h4>
+        <div class="row">
 
-            <p>
-              Please add your address first
-            </p>
+          <input
+            type="text"
+            placeholder="MM/YY"
+            [(ngModel)]="card.expiry">
 
-          </div>
+          <input
+            type="password"
+            placeholder="CVV"
+            [(ngModel)]="card.cvv">
 
         </div>
 
-        <button class="address-btn" (click)="goToProfile()">
-
-          Add Address
-
-        </button>
-
       </div>
 
-      <!-- PAY -->
+      <!-- PAY BUTTON -->
 
-      <button class="pay-btn" (click)="confirmPayment()" [disabled]="!userAddress?.address">
+      <button
+        class="pay-btn"
+        (click)="confirmPayment()"
+        [disabled]="!userAddress?.address">
 
-        Pay ₹ {{totalAmount}}
+        Pay ₹ {{ totalAmount }}
 
       </button>
 
@@ -226,57 +255,82 @@
 
     <!-- RIGHT -->
 
-    <div class="payment-right">
+    <div class="checkout-side">
 
-      <div class="premium-card">
+      <div class="card summary-card">
 
         <div class="summary-top">
 
-          <h3>
-            Order Summary
-          </h3>
+          <div>
 
-          <span>
-            {{cartItems.length}} Items
+            <small>
+              Secure Order
+            </small>
+
+            <h3>
+              Order Summary
+            </h3>
+
+          </div>
+
+          <span class="secure-tag">
+
+            🔒 Secure
+
           </span>
 
         </div>
 
-        <div class="product-card" *ngFor="let item of cartItems">
+        <div
+          *ngFor="let item of cartItems"
+          class="summary-item">
 
-          <img [src]="item.image" class="product-img">
+          <img [src]="item.image">
 
-          <div class="product-info">
-
-            <h4>
-              {{item.name}}
-            </h4>
+          <div class="summary-info">
 
             <p>
-              {{item.brand}}
+              {{ item.name }}
             </p>
 
-            <span>
-              Qty : {{item.quantity}}
-            </span>
+            <small>
+
+              Qty:
+              {{ item.quantity }}
+
+            </small>
 
           </div>
 
-          <div class="product-price">
+          <b>
 
-            ₹ {{item.price * item.quantity}}
+            ₹ {{ item.price * item.quantity }}
 
-          </div>
+          </b>
 
         </div>
 
-        <div class="final-total">
+        <div class="summary-divider"></div>
 
-          <span>Total</span>
+        <div class="summary-row">
 
-          <h2>
-            ₹ {{totalAmount}}
-          </h2>
+          <span>
+            Delivery
+          </span>
+
+          <span class="free">
+            FREE
+          </span>
+
+        </div>
+
+        <div class="summary-row total">
+
+          <span>Total : </span>
+
+          <b>
+            ₹ {{ totalAmount }}
+          </b>
 
         </div>
 
@@ -285,5 +339,23 @@
     </div>
 
   </div>
+
+  <!-- FOOTER -->
+
+  <footer class="checkout-footer">
+
+    <div class="footer-content">
+
+      <span>
+        💪 GymGear Pro
+      </span>
+
+      <span>
+        © 2026 • Secure Checkout • Fast Delivery
+      </span>
+
+    </div>
+
+  </footer>
 
 </div>
