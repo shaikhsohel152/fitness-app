@@ -17,7 +17,7 @@ export class ProductComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private searchService: SearchService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
 
@@ -35,30 +35,30 @@ export class ProductComponent implements OnInit {
 
   }
 
-loadProducts(): void {
+  loadProducts(): void {
 
-  this.productService.getProducts().subscribe({
+    this.productService.getProducts().subscribe({
 
-    next: (data: any) => {
+      next: (data: any) => {
 
-      console.log(data);
+        console.log('FULL RESPONSE:', data);
+        console.log('PRODUCTS:', data.products);
 
-      // FINAL FIX
-      this.products = data?.products?.[0]?.products || [];
+        this.products = data?.products?.[0]?.products || [];
 
-      this.filteredProducts = [...this.products];
+        this.filteredProducts = [...this.products];
 
-      console.log('Products Length:', this.products.length);
+        console.log('Products Length:', this.products.length);
 
-    },
+      },
 
-    error: (err) => {
-      console.log(err);
-    }
+      error: (err) => {
+        console.log(err);
+      }
 
-  });
+    });
 
-}
+  }
 
   applyFilter(): void {
 
