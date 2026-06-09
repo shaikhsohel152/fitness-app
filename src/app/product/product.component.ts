@@ -44,7 +44,10 @@ export class ProductComponent implements OnInit {
         console.log('FULL RESPONSE:', data);
         console.log('PRODUCTS:', data.products);
 
-        this.products = data.products || [];
+        this.products = data?.products?.[0]?.products || [];
+        this.filteredProducts = [...this.products];
+
+        console.log("Products Length:", this.products.length);
 
         this.filteredProducts = [...this.products];
 
