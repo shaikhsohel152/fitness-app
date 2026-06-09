@@ -44,7 +44,7 @@ export class ProductComponent implements OnInit {
         console.log('FULL RESPONSE:', data);
         console.log('PRODUCTS:', data.products);
 
-        this.products = data?.products?.[0]?.products || [];
+        this.products = data.products || [];
 
         this.filteredProducts = [...this.products];
 
