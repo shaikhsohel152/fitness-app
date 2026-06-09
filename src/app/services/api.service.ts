@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class ApiService {
 
   // ================= BASE URL =================
- private BASE_URL = "http://localhost:3500";
+ private BASE_URL = "https://angular-fitness-database.onrender.com";
 
   constructor(private http: HttpClient) {}
 
